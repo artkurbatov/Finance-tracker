@@ -7,11 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FinanceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .systemPink
     }
 
 
