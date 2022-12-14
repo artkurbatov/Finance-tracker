@@ -13,8 +13,8 @@
 		B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA6294901F100C061DF /* Finance_tracker.xcdatamodeld */; };
 		B8289CAA294901F100C061DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8289CA9294901F100C061DF /* Assets.xcassets */; };
 		B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8458550294A0B7D003DA84C /* FinanceModel.swift */; };
-		B8458554294A0C3C003DA84C /* Finance+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8458552294A0C3C003DA84C /* Finance+CoreDataClass.swift */; };
-		B8F990C02949EF7E005A4086 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F990BF2949EF7E005A4086 /* TransactionViewController.swift */; };
+		B8A4C19B294A56010026A118 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A4C199294A56010026A118 /* Transaction+CoreDataClass.swift */; };
+		B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A4C19D294A58BE0026A118 /* TransactionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +26,8 @@
 		B8289CA9294901F100C061DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8289CAE294901F100C061DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8458550294A0B7D003DA84C /* FinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceModel.swift; sourceTree = "<group>"; };
-		B8458552294A0C3C003DA84C /* Finance+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Finance+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B8F990BF2949EF7E005A4086 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		B8A4C199294A56010026A118 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B8A4C19D294A58BE0026A118 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +63,9 @@
 				B8289C9D294901F100C061DF /* AppDelegate.swift */,
 				B8289C9F294901F100C061DF /* SceneDelegate.swift */,
 				B8289CA1294901F100C061DF /* FinanceViewController.swift */,
-				B8F990BF2949EF7E005A4086 /* TransactionViewController.swift */,
+				B8A4C19D294A58BE0026A118 /* TransactionCell.swift */,
 				B8458550294A0B7D003DA84C /* FinanceModel.swift */,
-				B8458552294A0C3C003DA84C /* Finance+CoreDataClass.swift */,
+				B8A4C199294A56010026A118 /* Transaction+CoreDataClass.swift */,
 				B8289CA9294901F100C061DF /* Assets.xcassets */,
 				B8289CAE294901F100C061DF /* Info.plist */,
 				B8289CA6294901F100C061DF /* Finance_tracker.xcdatamodeld */,
@@ -142,12 +142,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8F990C02949EF7E005A4086 /* TransactionViewController.swift in Sources */,
+				B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */,
 				B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */,
 				B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */,
 				B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */,
 				B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */,
-				B8458554294A0C3C003DA84C /* Finance+CoreDataClass.swift in Sources */,
+				B8A4C19B294A56010026A118 /* Transaction+CoreDataClass.swift in Sources */,
 				B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

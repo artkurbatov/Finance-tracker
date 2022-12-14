@@ -13,6 +13,8 @@ class FinanceViewController: UIViewController {
     private let addButton = UIButton()
     private let historyTableView = UITableView()
    // private let periodPicker = UIPickerView()
+    
+    private let model = FinanceModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +22,13 @@ class FinanceViewController: UIViewController {
         view.backgroundColor = .systemBackground
         historyTableView.delegate = self
         historyTableView.dataSource = self
-        historyTableView.register(UITableViewCell.self, forCellReuseIdentifier: "financeCell")
+        historyTableView.register(TransactionCell.self, forCellReuseIdentifier: FinanceModel.identifier)
         
+        model.fetchTransactions(tableView: historyTableView)
+
         setupTitleLabel()
         setupAddButton()
+        configureTableView()
     }
     
     // MARK: - Views setup
@@ -58,16 +63,23 @@ class FinanceViewController: UIViewController {
         addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         addButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
     }
+    
+    private func configureTableView() {
+        
+        view.addSubview(historyTableView)
+        
+        historyTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        historyTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+    }
 
     @objc private func addButtonAction() {
-        
-        let transactionVC = TransactionViewController()
-        transactionVC.modalPresentationStyle = .pageSheet
-        if let sheet = transactionVC.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersGrabberVisible = true
-        }
-        present(transactionVC, animated: true)
+        let alert = model.createAlert(tableView: historyTableView)
+        present(alert, animated: true)
     }
 }
 
@@ -75,12 +87,14 @@ class FinanceViewController: UIViewController {
 extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return model.transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = historyTableView.dequeueReusableCell(withIdentifier: "financeCell", for: indexPath)
-        return cell
+        if let cell = historyTableView.dequeueReusableCell(withIdentifier: FinanceModel.identifier, for: indexPath) as? TransactionCell {
+            cell.configureCell(transactionToDisplay: model.transactions[indexPath.row])
+        }
+        return UITableViewCell()
     }
 }
 
