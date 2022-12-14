@@ -12,7 +12,7 @@ class FinanceViewController: UIViewController {
     private let titleLabel = UILabel()
     private let addButton = UIButton()
     private let historyTableView = UITableView()
-    private let periodPicker = UIPickerView()
+   // private let periodPicker = UIPickerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,14 @@ class FinanceViewController: UIViewController {
     }
 
     @objc private func addButtonAction() {
-        print("add")
+        
+        let transactionVC = TransactionViewController()
+        transactionVC.modalPresentationStyle = .pageSheet
+        if let sheet = transactionVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+        present(transactionVC, animated: true)
     }
 }
 

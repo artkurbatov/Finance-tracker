@@ -12,7 +12,7 @@
 		B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA1294901F100C061DF /* FinanceViewController.swift */; };
 		B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA6294901F100C061DF /* Finance_tracker.xcdatamodeld */; };
 		B8289CAA294901F100C061DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8289CA9294901F100C061DF /* Assets.xcassets */; };
-		B8289CB52949023D00C061DF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289CB42949023D00C061DF /* TabBarViewController.swift */; };
+		B8F990C02949EF7E005A4086 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F990BF2949EF7E005A4086 /* TransactionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		B8289CA7294901F100C061DF /* Finance_tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Finance_tracker.xcdatamodel; sourceTree = "<group>"; };
 		B8289CA9294901F100C061DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8289CAE294901F100C061DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8289CB42949023D00C061DF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		B8F990BF2949EF7E005A4086 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +58,8 @@
 			children = (
 				B8289C9D294901F100C061DF /* AppDelegate.swift */,
 				B8289C9F294901F100C061DF /* SceneDelegate.swift */,
-				B8289CB42949023D00C061DF /* TabBarViewController.swift */,
 				B8289CA1294901F100C061DF /* FinanceViewController.swift */,
+				B8F990BF2949EF7E005A4086 /* TransactionViewController.swift */,
 				B8289CA9294901F100C061DF /* Assets.xcassets */,
 				B8289CAE294901F100C061DF /* Info.plist */,
 				B8289CA6294901F100C061DF /* Finance_tracker.xcdatamodeld */,
@@ -136,10 +136,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F990C02949EF7E005A4086 /* TransactionViewController.swift in Sources */,
 				B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */,
 				B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */,
 				B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */,
-				B8289CB52949023D00C061DF /* TabBarViewController.swift in Sources */,
 				B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
