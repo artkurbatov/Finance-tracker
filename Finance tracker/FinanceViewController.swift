@@ -93,8 +93,11 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = historyTableView.dequeueReusableCell(withIdentifier: FinanceModel.identifier, for: indexPath) as? TransactionCell {
             cell.configureCell(transactionToDisplay: model.transactions[indexPath.row])
+            return cell
         }
-        return UITableViewCell()
+        else {
+            return UITableViewCell()
+        }
     }
 }
 

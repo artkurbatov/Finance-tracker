@@ -16,6 +16,8 @@ class FinanceModel {
     var transactions = [Transaction]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    
+    
     func createAlert(tableView: UITableView) -> UIAlertController {
         
         let alert = UIAlertController(title: "Add transaction", message: "", preferredStyle: .alert)
@@ -24,9 +26,15 @@ class FinanceModel {
         
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
-                if let _ = Int(alert.textFields![0].text!) {
+                var amount = alert.textFields![0].text!
+                if let _ = Double(amount) {
+                    if !amount.contains(".") {
+                        amount += ".00"
+                    }
+                    // TODO: Change symbol for 
+                    amount += " $"
                     let dateString = self.getDateString()
-                    self.saveTransactions(amount: alert.textFields![0].text!, date: dateString, tableView: tableView)
+                    self.saveTransactions(amount: amount, date: dateString, tableView: tableView)
                 }
             }
         }
@@ -37,6 +45,9 @@ class FinanceModel {
         
         return alert
     }
+    
+    
+    
     
     private func getDateString() -> String {
         let formatter = DateFormatter()

@@ -25,6 +25,7 @@ class TransactionCell: UITableViewCell {
         addSubview(transactionAmount)
         
         transactionAmount.text = amount
+        transactionAmount.textColor = amount.starts(with: "-") ? .systemRed : .systemGreen
         
         transactionAmount.translatesAutoresizingMaskIntoConstraints = false
         
@@ -38,6 +39,7 @@ class TransactionCell: UITableViewCell {
         addSubview(transactionDate)
         
         transactionDate.text = date
+        transactionDate.textAlignment = .right
         
         transactionDate.translatesAutoresizingMaskIntoConstraints = false
         
