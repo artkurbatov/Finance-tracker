@@ -10,7 +10,9 @@ import UIKit
 class FinanceViewController: UIViewController {
     
     private let titleLabel = UILabel()
+    private let totalLabel = UILabel()
     private let addButton = UIButton()
+    private let clearButton = UIButton()
     private let historyTableView = UITableView()
    // private let periodPicker = UIPickerView()
     
@@ -29,6 +31,8 @@ class FinanceViewController: UIViewController {
         setupTitleLabel()
         setupAddButton()
         configureTableView()
+        configureTotalLabel()
+        configureClearButton()
     }
     
     // MARK: - Views setup
@@ -53,7 +57,6 @@ class FinanceViewController: UIViewController {
         
         addButton.setImage(UIImage(systemName: "plus.forwardslash.minus"), for: .normal)
         
-        
         addButton.tintColor = .black
         
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
@@ -68,13 +71,47 @@ class FinanceViewController: UIViewController {
         
         view.addSubview(historyTableView)
         
+        historyTableView.showsVerticalScrollIndicator = false
+        historyTableView.allowsSelection = false
+        
         historyTableView.translatesAutoresizingMaskIntoConstraints = false
         
         historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         historyTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
-        historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        historyTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
+    }
+    
+    private func configureTotalLabel() {
         
+        view.addSubview(totalLabel)
+        
+        totalLabel.text = "Total: 13.10$"
+        totalLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        totalLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        totalLabel.topAnchor.constraint(equalTo: historyTableView.bottomAnchor, constant: 20).isActive = true
+        totalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        totalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    private func configureClearButton() {
+        
+        view.addSubview(clearButton)
+        
+        clearButton.configuration = .filled()
+        clearButton.configuration?.cornerStyle = .capsule
+        clearButton.configuration?.baseBackgroundColor = .systemRed
+        clearButton.configuration?.baseForegroundColor = .white
+        clearButton.configuration?.title = "Clear"
+        
+        clearButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
+        clearButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
     @objc private func addButtonAction() {
@@ -82,7 +119,6 @@ class FinanceViewController: UIViewController {
         present(alert, animated: true)
     }
 }
-
 
 extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -95,9 +131,7 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(transactionToDisplay: model.transactions[indexPath.row])
             return cell
         }
-        else {
-            return UITableViewCell()
-        }
+        else { return UITableViewCell() }
     }
 }
 
