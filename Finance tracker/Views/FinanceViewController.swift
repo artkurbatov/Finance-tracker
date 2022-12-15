@@ -10,9 +10,13 @@ import UIKit
 class FinanceViewController: UIViewController {
     
     private let titleLabel = UILabel()
-    private let totalLabel = UILabel()
+    private let total = UILabel()
+    private let messageLabel = UILabel()
+    private let totalAmountLabel = UILabel()
+    
     private let addButton = UIButton()
     private let clearButton = UIButton()
+    
     private let historyTableView = UITableView()
    // private let periodPicker = UIPickerView()
     
@@ -30,8 +34,9 @@ class FinanceViewController: UIViewController {
 
         setupTitleLabel()
         setupAddButton()
+        
         configureTableView()
-        configureTotalLabel()
+        //configureTotalLabel()
         configureClearButton()
     }
     
@@ -70,10 +75,11 @@ class FinanceViewController: UIViewController {
     private func configureTableView() {
         
         view.addSubview(historyTableView)
+        view.addSubview(total)
         
         historyTableView.showsVerticalScrollIndicator = false
         historyTableView.allowsSelection = false
-        
+                
         historyTableView.translatesAutoresizingMaskIntoConstraints = false
         
         historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -82,18 +88,26 @@ class FinanceViewController: UIViewController {
         historyTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
     }
     
+    private func configureTotal() {
+        
+        
+        
+    }
+    
     private func configureTotalLabel() {
         
-        view.addSubview(totalLabel)
+        view.addSubview(total)
         
-        totalLabel.text = "Total: 13.10$"
-        totalLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        total.text = "Total: 13.10$"
+        total.font = UIFont.boldSystemFont(ofSize: 20)
         
-        totalLabel.translatesAutoresizingMaskIntoConstraints = false
+        total.translatesAutoresizingMaskIntoConstraints = false
         
-        totalLabel.topAnchor.constraint(equalTo: historyTableView.bottomAnchor, constant: 20).isActive = true
-        totalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        totalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        //total.topAnchor.constraint(equalTo: historyTableView.bottomAnchor, constant: 20).isActive = true
+        //total.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        //total.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        total.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
+        total.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     private func configureClearButton() {
@@ -138,6 +152,11 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         else { return UITableViewCell() }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        
+        return "Total: 14.13$"
     }
 }
 
