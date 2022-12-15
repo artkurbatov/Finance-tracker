@@ -106,6 +106,8 @@ class FinanceViewController: UIViewController {
         clearButton.configuration?.baseForegroundColor = .white
         clearButton.configuration?.title = "Clear"
         
+        clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
+        
         clearButton.translatesAutoresizingMaskIntoConstraints = false
         
         clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
@@ -117,6 +119,10 @@ class FinanceViewController: UIViewController {
     @objc private func addButtonAction() {
         let alert = model.createAlert(tableView: historyTableView)
         present(alert, animated: true)
+    }
+    
+    @objc private func clearButtonAction() {
+        model.clearTransactions(tableView: historyTableView)
     }
 }
 

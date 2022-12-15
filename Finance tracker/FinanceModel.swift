@@ -47,8 +47,6 @@ class FinanceModel {
     }
     
     
-    
-    
     private func getDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
@@ -90,6 +88,22 @@ class FinanceModel {
     private func deleteTransaction(transactionID: Int, tableView: UITableView) {
         
         self.context.delete(transactions[transactionID])
+        
+        do {
+            try self.context.save()
+        }
+        catch {
+            //TODO: Error handler
+        }
+        
+        fetchTransactions(tableView: tableView)
+    }
+    
+    func clearTransactions(tableView: UITableView) {
+        
+        for transaction in transactions {
+            self.context.delete(transaction)
+        }
         
         do {
             try self.context.save()
