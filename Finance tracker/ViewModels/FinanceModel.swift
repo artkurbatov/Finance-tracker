@@ -11,6 +11,8 @@ import CoreData
 
 class FinanceModel {
     
+    #warning("max 2 digits after dot")
+    
     static let identifier = "transactionCell"
     
     var transactions = [Transaction]()
@@ -20,7 +22,7 @@ class FinanceModel {
     
     func createAlert(tableView: UITableView) -> UIAlertController {
         
-        let alert = UIAlertController(title: "Add transaction", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
         
         alert.addTextField()
         
@@ -31,8 +33,8 @@ class FinanceModel {
                     if !amount.contains(".") {
                         amount += ".00"
                     }
-                    // TODO: Change symbol for 
-                    amount += " $"
+                    // TODO: Change symbol for
+                    //amount += " $"
                     let dateString = self.getDateString()
                     self.saveTransactions(amount: amount, date: dateString, tableView: tableView)
                 }
@@ -54,6 +56,23 @@ class FinanceModel {
         let dateString = formatter.string(from: date)
         return dateString
     }
+    
+    
+    func calculateTotal(transactions: [Transaction]) -> Double {
+        
+        var total = 0.0
+        
+        for transaction in transactions {
+            guard transaction.amount != nil else { continue }
+            if let num = Double(transaction.amount!) {
+                total += num
+            }
+           
+        }
+        
+        return total
+    }
+    
     
     // MARK: - Core Data functions
     func fetchTransactions(tableView: UITableView) {

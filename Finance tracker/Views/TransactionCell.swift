@@ -24,7 +24,7 @@ class TransactionCell: UITableViewCell {
         
         addSubview(transactionAmount)
         
-        transactionAmount.text = amount
+        transactionAmount.text = amount + " $"
         transactionAmount.textColor = amount.starts(with: "-") ? .systemRed : .systemGreen
         
         transactionAmount.translatesAutoresizingMaskIntoConstraints = false

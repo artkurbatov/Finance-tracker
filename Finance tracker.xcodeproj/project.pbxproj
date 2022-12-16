@@ -7,21 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B8113291294A681B008BD474 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B811328F294A681B008BD474 /* Transaction+CoreDataClass.swift */; };
-		B8113292294A681B008BD474 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8113290294A681B008BD474 /* Transaction+CoreDataProperties.swift */; };
 		B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289C9D294901F100C061DF /* AppDelegate.swift */; };
 		B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289C9F294901F100C061DF /* SceneDelegate.swift */; };
 		B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA1294901F100C061DF /* FinanceViewController.swift */; };
 		B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA6294901F100C061DF /* Finance_tracker.xcdatamodeld */; };
 		B8289CAA294901F100C061DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8289CA9294901F100C061DF /* Assets.xcassets */; };
 		B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8458550294A0B7D003DA84C /* FinanceModel.swift */; };
-		B8807EA5294BC5FB00FD94BC /* TableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8807EA4294BC5FB00FD94BC /* TableViewFooterView.swift */; };
+		B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */; };
 		B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A4C19D294A58BE0026A118 /* TransactionCell.swift */; };
+		B8B3F269294CB32F008DADD3 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B3F267294CB32F008DADD3 /* Transaction+CoreDataClass.swift */; };
+		B8B3F26A294CB32F008DADD3 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B3F268294CB32F008DADD3 /* Transaction+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B811328F294A681B008BD474 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B8113290294A681B008BD474 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B8289C9A294901F100C061DF /* Finance tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Finance tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8289C9D294901F100C061DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8289C9F294901F100C061DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,8 +28,10 @@
 		B8289CA9294901F100C061DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8289CAE294901F100C061DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8458550294A0B7D003DA84C /* FinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceModel.swift; sourceTree = "<group>"; };
-		B8807EA4294BC5FB00FD94BC /* TableViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFooterView.swift; sourceTree = "<group>"; };
+		B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFooter.swift; sourceTree = "<group>"; };
 		B8A4C19D294A58BE0026A118 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		B8B3F267294CB32F008DADD3 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B8B3F268294CB32F008DADD3 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +79,8 @@
 		B8807EA6294BC60D00FD94BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B8113290294A681B008BD474 /* Transaction+CoreDataProperties.swift */,
-				B811328F294A681B008BD474 /* Transaction+CoreDataClass.swift */,
+				B8B3F267294CB32F008DADD3 /* Transaction+CoreDataClass.swift */,
+				B8B3F268294CB32F008DADD3 /* Transaction+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -90,7 +90,7 @@
 			children = (
 				B8289CA1294901F100C061DF /* FinanceViewController.swift */,
 				B8A4C19D294A58BE0026A118 /* TransactionCell.swift */,
-				B8807EA4294BC5FB00FD94BC /* TableViewFooterView.swift */,
+				B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,12 +172,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8113292294A681B008BD474 /* Transaction+CoreDataProperties.swift in Sources */,
 				B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */,
-				B8807EA5294BC5FB00FD94BC /* TableViewFooterView.swift in Sources */,
+				B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */,
 				B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */,
 				B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */,
-				B8113291294A681B008BD474 /* Transaction+CoreDataClass.swift in Sources */,
+				B8B3F269294CB32F008DADD3 /* Transaction+CoreDataClass.swift in Sources */,
+				B8B3F26A294CB32F008DADD3 /* Transaction+CoreDataProperties.swift in Sources */,
 				B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */,
 				B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */,
 				B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */,
