@@ -34,6 +34,7 @@ class CustomFooter: UITableViewHeaderFooterView {
         
         amount.text = summ
         amount.font = UIFont.boldSystemFont(ofSize: 20)
+        amount.textAlignment = .right
         
         let split = summ.split(separator: " ")
         
@@ -48,8 +49,7 @@ class CustomFooter: UITableViewHeaderFooterView {
         
         NSLayoutConstraint.activate([
             total.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            total.widthAnchor.constraint(equalToConstant: 60),
-            //total.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
+            total.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             
             amount.leadingAnchor.constraint(equalTo: total.trailingAnchor),
             amount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)

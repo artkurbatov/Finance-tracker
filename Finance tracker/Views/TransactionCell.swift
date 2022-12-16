@@ -28,10 +28,16 @@ class TransactionCell: UITableViewCell {
         transactionAmount.textColor = amount.starts(with: "-") ? .systemRed : .systemGreen
         
         transactionAmount.translatesAutoresizingMaskIntoConstraints = false
+        transactionAmount.textAlignment = .right
         
-        transactionAmount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+//        transactionAmount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+//        transactionAmount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        transactionAmount.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+        
+        transactionAmount.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
         transactionAmount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         transactionAmount.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+        
     }
     
     private func configureDate(date: String) {
@@ -42,8 +48,13 @@ class TransactionCell: UITableViewCell {
         transactionDate.textAlignment = .right
         
         transactionDate.translatesAutoresizingMaskIntoConstraints = false
+        transactionDate.textAlignment = .left
         
-        transactionDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+//        transactionDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+//        transactionDate.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        transactionDate.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
+        
+        transactionDate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         transactionDate.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         transactionDate.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
     }

@@ -131,6 +131,16 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
         else { return UITableViewCell() }
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "delete") { _, _, _ in
+            self.model.deleteTransaction(transactionID: indexPath.row, tableView: self.historyTableView)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = historyTableView.dequeueReusableHeaderFooterView(withIdentifier: "footer") as! CustomFooter
         let sum = model.calculateTotal(transactions: model.transactions)

@@ -103,7 +103,7 @@ class FinanceModel {
         fetchTransactions(tableView: tableView)
     }
     
-    private func deleteTransaction(transactionID: Int, tableView: UITableView) {
+    func deleteTransaction(transactionID: Int, tableView: UITableView) {
         
         self.context.delete(transactions[transactionID])
         
