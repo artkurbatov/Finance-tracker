@@ -34,7 +34,17 @@ class CustomFooter: UITableViewHeaderFooterView {
         
         amount.text = summ
         amount.font = UIFont.boldSystemFont(ofSize: 20)
-        amount.textColor = .systemRed
+        
+        let split = summ.split(separator: " ")
+        
+        var color: UIColor = .lightGray
+        
+        if let number = Double(split[0]) {
+            if number > 0 { color = .systemGreen }
+            else if number < 0 { color = .systemRed }
+        }
+        
+        amount.textColor = color
         
         NSLayoutConstraint.activate([
             total.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),

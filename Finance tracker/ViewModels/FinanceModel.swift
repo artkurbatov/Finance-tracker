@@ -31,7 +31,7 @@ class FinanceModel {
                 var amount = alert.textFields![0].text!
                 if let _ = Double(amount) {
                     if !amount.contains(".") {
-                        amount += ".00"
+                        amount += ".0"
                     }
                     // TODO: Change symbol for
                     //amount += " $"
@@ -67,10 +67,9 @@ class FinanceModel {
             if let num = Double(transaction.amount!) {
                 total += num
             }
-           
         }
         
-        return total
+        return total.round(to: 2)
     }
     
     
@@ -134,4 +133,11 @@ class FinanceModel {
         fetchTransactions(tableView: tableView)
     }
     
+}
+
+extension Double {
+    func round(to places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
