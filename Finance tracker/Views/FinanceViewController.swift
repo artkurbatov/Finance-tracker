@@ -17,7 +17,15 @@ class FinanceViewController: UIViewController {
     private let clearButton = UIButton()
     
     private let historyTableView = UITableView()
-    private let periodPicker = UIPickerView()
+    
+    private let periodPicker: UISegmentedControl = {
+        let view = UISegmentedControl(items: ["One", "Two", "Three"])
+        view.selectedSegmentIndex = 0
+        view.addTarget(self, action: #selector(sortTransactions), for: .valueChanged)
+        return view
+    }()
+    
+    private let feedback = UISelectionFeedbackGenerator()
     
     private let model = FinanceModel()
 
@@ -28,6 +36,8 @@ class FinanceViewController: UIViewController {
         historyTableView.delegate = self
         historyTableView.dataSource = self
         
+        feedback.prepare()
+                
         model.fetchTransactions(tableView: historyTableView)
 
         setupTitleLabel()
@@ -83,7 +93,7 @@ class FinanceViewController: UIViewController {
             periodPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             periodPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             periodPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            periodPicker.heightAnchor.constraint(equalToConstant: 40)
+            //periodPicker.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -129,12 +139,27 @@ class FinanceViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @objc private func sortTransactions() {
+        feedback.selectionChanged()
+        
+        switch periodPicker.selectedSegmentIndex {
+        case 0 :
+            view.backgroundColor = .purple
+        case 1 :
+            view.backgroundColor = .blue
+        default:
+            view.backgroundColor = .orange
+        }
+        
+    }
+    
     @objc private func clearButtonAction() {
         if !model.transactions.isEmpty {
             model.clearTransactions(tableView: historyTableView)
         }
     }
 }
+
 
 extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     
