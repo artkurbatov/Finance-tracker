@@ -74,6 +74,17 @@ class FinanceViewController: UIViewController {
     
     private func setupPickerView() {
         
+        view.addSubview(periodPicker)
+        
+        periodPicker.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            periodPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            periodPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            periodPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            periodPicker.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     private func configureTableView() {
@@ -89,7 +100,7 @@ class FinanceViewController: UIViewController {
         
         historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        historyTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        historyTableView.topAnchor.constraint(equalTo: periodPicker.bottomAnchor, constant: 10).isActive = true
         historyTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
     }
         
