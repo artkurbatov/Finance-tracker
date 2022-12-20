@@ -17,7 +17,7 @@ class FinanceViewController: UIViewController {
     private let clearButton = UIButton()
     
     private let historyTableView = UITableView()
-   // private let periodPicker = UIPickerView()
+    private let periodPicker = UIPickerView()
     
     private let model = FinanceModel()
 
@@ -32,12 +32,13 @@ class FinanceViewController: UIViewController {
 
         setupTitleLabel()
         setupAddButton()
+        setupPickerView()
         configureTableView()
         configureClearButton()
     }
     
     // MARK: - Views setup
-
+    
     private func setupTitleLabel() {
         
         view.addSubview(titleLabel)
@@ -58,6 +59,9 @@ class FinanceViewController: UIViewController {
         
         addButton.setImage(UIImage(systemName: "plus.forwardslash.minus"), for: .normal)
         
+        addButton.backgroundColor = .white
+        addButton.layer.cornerRadius = 5
+        
         addButton.tintColor = .black
         
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
@@ -66,6 +70,10 @@ class FinanceViewController: UIViewController {
         
         addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         addButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+    }
+    
+    private func setupPickerView() {
+        
     }
     
     private func configureTableView() {
