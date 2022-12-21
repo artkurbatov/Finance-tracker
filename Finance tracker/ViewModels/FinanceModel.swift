@@ -16,6 +16,7 @@ class FinanceModel {
     static let identifier = "transactionCell"
     
     var transactions = [Transaction]()
+
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
@@ -48,8 +49,7 @@ class FinanceModel {
         return alert
     }
     
-    
-    private func getDateString() -> String {
+    func getDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         let date = Date()
@@ -88,7 +88,7 @@ class FinanceModel {
         }
     }
     
-    private func saveTransactions(amount: String, date: String, tableView: UITableView) {
+    func saveTransactions(amount: String, date: String, tableView: UITableView) {
         let transaction = Transaction(context: self.context)
         transaction.amount = amount
         transaction.date = date

@@ -19,8 +19,8 @@ class FinanceViewController: UIViewController {
     private let historyTableView = UITableView()
     
     private let periodPicker: UISegmentedControl = {
-        let view = UISegmentedControl(items: ["One", "Two", "Three"])
-        view.selectedSegmentIndex = 0
+        let view = UISegmentedControl(items: ["Day", "Month", "Year", "All time"])
+        view.selectedSegmentIndex = 3
         view.addTarget(self, action: #selector(sortTransactions), for: .valueChanged)
         return view
     }()
@@ -28,6 +28,7 @@ class FinanceViewController: UIViewController {
     private let feedback = UISelectionFeedbackGenerator()
     
     private let model = FinanceModel()
+    private var filteredTransactions = [Transaction]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,8 @@ class FinanceViewController: UIViewController {
         feedback.prepare()
                 
         model.fetchTransactions(tableView: historyTableView)
+        
+        filteredTransactions = model.transactions
 
         setupTitleLabel()
         setupAddButton()
@@ -91,9 +94,8 @@ class FinanceViewController: UIViewController {
         NSLayoutConstraint.activate([
             
             periodPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            periodPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            periodPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            //periodPicker.heightAnchor.constraint(equalToConstant: 40)
+            periodPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            periodPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
         ])
     }
     
@@ -135,7 +137,32 @@ class FinanceViewController: UIViewController {
     }
 
     @objc private func addButtonAction() {
-        let alert = model.createAlert(tableView: historyTableView)
+        
+        let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
+        
+        alert.addTextField()
+        
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+            if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
+                var amount = alert.textFields![0].text!
+                if let _ = Double(amount) {
+                    if !amount.contains(".") {
+                        amount += ".0"
+                    }
+                    // TODO: Change symbol for
+                    //amount += " $"
+                    let dateString = self.model.getDateString()
+                    self.model.saveTransactions(amount: amount, date: dateString, tableView: self.historyTableView)
+                    self.filteredTransactions = self.model.transactions
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+//        let alert = model.createAlert(tableView: historyTableView)
         present(alert, animated: true)
     }
     
@@ -144,9 +171,17 @@ class FinanceViewController: UIViewController {
         
         switch periodPicker.selectedSegmentIndex {
         case 0 :
-            view.backgroundColor = .purple
+            filteredTransactions = model.transactions.filter({ transaction in
+                transaction.date == model.getDateString()
+                //historyTableView.reloadData()
+            })
         case 1 :
-            view.backgroundColor = .blue
+            filteredTransactions = model.transactions.filter({ transaction in
+                transaction.date == model.getDateString()
+                //historyTableView.reloadData()
+            })
+        case 2:
+            view.backgroundColor = .systemPink
         default:
             view.backgroundColor = .orange
         }
@@ -156,6 +191,7 @@ class FinanceViewController: UIViewController {
     @objc private func clearButtonAction() {
         if !model.transactions.isEmpty {
             model.clearTransactions(tableView: historyTableView)
+            filteredTransactions = []
         }
     }
 }
@@ -164,7 +200,7 @@ class FinanceViewController: UIViewController {
 extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.transactions.count
+        return filteredTransactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,6 +215,7 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
         
         let action = UIContextualAction(style: .destructive, title: "delete") { _, _, _ in
             self.model.deleteTransaction(transactionID: indexPath.row, tableView: self.historyTableView)
+            self.filteredTransactions = self.model.transactions
         }
         
         return UISwipeActionsConfiguration(actions: [action])
@@ -187,7 +224,7 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = historyTableView.dequeueReusableHeaderFooterView(withIdentifier: "footer") as! CustomFooter
-        let sum = model.calculateTotal(transactions: model.transactions)
+        let sum = model.calculateTotal(transactions: filteredTransactions)
         view.configure(summ: "\(sum) $")
         return view
     }
