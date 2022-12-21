@@ -2,7 +2,7 @@
 //  Transaction+CoreDataClass.swift
 //  Finance tracker
 //
-//  Created by Kurbatov Artem on 16.12.2022.
+//  Created by Kurbatov Artem on 21.12.2022.
 //
 //
 

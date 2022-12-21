@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80139282953A35700B0E217 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80139262953A35700B0E217 /* Transaction+CoreDataClass.swift */; };
+		B80139292953A35700B0E217 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80139272953A35700B0E217 /* Transaction+CoreDataProperties.swift */; };
 		B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289C9D294901F100C061DF /* AppDelegate.swift */; };
 		B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289C9F294901F100C061DF /* SceneDelegate.swift */; };
 		B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA1294901F100C061DF /* FinanceViewController.swift */; };
@@ -16,11 +18,11 @@
 		B864A4A2294D0ACE00C5F9B7 /* NewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B864A4A1294D0ACE00C5F9B7 /* NewTransactionViewController.swift */; };
 		B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */; };
 		B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A4C19D294A58BE0026A118 /* TransactionCell.swift */; };
-		B8B3F269294CB32F008DADD3 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B3F267294CB32F008DADD3 /* Transaction+CoreDataClass.swift */; };
-		B8B3F26A294CB32F008DADD3 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B3F268294CB32F008DADD3 /* Transaction+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B80139262953A35700B0E217 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B80139272953A35700B0E217 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B8289C9A294901F100C061DF /* Finance tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Finance tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8289C9D294901F100C061DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8289C9F294901F100C061DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,8 +34,6 @@
 		B864A4A1294D0ACE00C5F9B7 /* NewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionViewController.swift; sourceTree = "<group>"; };
 		B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFooter.swift; sourceTree = "<group>"; };
 		B8A4C19D294A58BE0026A118 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
-		B8B3F267294CB32F008DADD3 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B8B3F268294CB32F008DADD3 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +81,8 @@
 		B8807EA6294BC60D00FD94BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B8B3F267294CB32F008DADD3 /* Transaction+CoreDataClass.swift */,
-				B8B3F268294CB32F008DADD3 /* Transaction+CoreDataProperties.swift */,
+				B80139262953A35700B0E217 /* Transaction+CoreDataClass.swift */,
+				B80139272953A35700B0E217 /* Transaction+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,13 +175,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80139292953A35700B0E217 /* Transaction+CoreDataProperties.swift in Sources */,
 				B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */,
 				B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */,
 				B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */,
 				B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */,
+				B80139282953A35700B0E217 /* Transaction+CoreDataClass.swift in Sources */,
 				B864A4A2294D0ACE00C5F9B7 /* NewTransactionViewController.swift in Sources */,
-				B8B3F269294CB32F008DADD3 /* Transaction+CoreDataClass.swift in Sources */,
-				B8B3F26A294CB32F008DADD3 /* Transaction+CoreDataProperties.swift in Sources */,
 				B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */,
 				B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */,
 				B8289CA8294901F100C061DF /* Finance_tracker.xcdatamodeld in Sources */,
