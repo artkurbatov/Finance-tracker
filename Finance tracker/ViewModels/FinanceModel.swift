@@ -29,15 +29,15 @@ class FinanceModel {
         
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
-                var amount = alert.textFields![0].text!
-                if let _ = Double(amount) {
-                    if !amount.contains(".") {
-                        amount += ".0"
-                    }
+                let amount = alert.textFields![0].text!
+                if let number = Double(amount) {
+//                    if !amount.contains(".") {
+//                        amount += ".0"
+//                    }
                     // TODO: Change symbol for
                     //amount += " $"
                     let dateString = self.getDateString()
-                    self.saveTransactions(amount: amount, date: dateString, tableView: tableView)
+                    self.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2, tableView: tableView)
                 }
             }
         }
@@ -49,12 +49,20 @@ class FinanceModel {
         return alert
     }
     
-    func getDateString() -> String {
+    func getDateString() -> (String, String, String) {
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
+        
         let date = Date()
         let dateString = formatter.string(from: date)
-        return dateString
+        let compontents = dateString.split(separator: "/")
+        
+        let day = String(compontents[0])
+        let month = String(compontents[1])
+        let year = String(compontents[2])
+        
+        return (day, month, year)
     }
     
     
@@ -63,10 +71,7 @@ class FinanceModel {
         var total = 0.0
         
         for transaction in transactions {
-            guard transaction.amount != nil else { continue }
-            if let num = Double(transaction.amount!) {
-                total += num
-            }
+            total += transaction.amount
         }
         
         return total.round(to: 2)
@@ -88,10 +93,12 @@ class FinanceModel {
         }
     }
     
-    func saveTransactions(amount: String, date: String, tableView: UITableView) {
+    func saveTransactions(amount: Double, day: String, month: String, year: String, tableView: UITableView) {
         let transaction = Transaction(context: self.context)
         transaction.amount = amount
-        transaction.date = date
+        transaction.day = day
+        transaction.month = month
+        transaction.year = year
         
         do {
             try self.context.save()

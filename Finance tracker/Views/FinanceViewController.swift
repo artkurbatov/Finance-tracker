@@ -144,15 +144,15 @@ class FinanceViewController: UIViewController {
         
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
-                var amount = alert.textFields![0].text!
-                if let _ = Double(amount) {
-                    if !amount.contains(".") {
-                        amount += ".0"
-                    }
+                let amount = alert.textFields![0].text!
+                if let number = Double(amount) {
+//                    if !amount.contains(".") {
+//                        amount += ".0"
+//                    }
                     // TODO: Change symbol for
                     //amount += " $"
                     let dateString = self.model.getDateString()
-                    self.model.saveTransactions(amount: amount, date: dateString, tableView: self.historyTableView)
+                    self.model.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2, tableView: self.historyTableView)
                     self.filteredTransactions = self.model.transactions
                 }
             }
@@ -172,18 +172,21 @@ class FinanceViewController: UIViewController {
         switch periodPicker.selectedSegmentIndex {
         case 0 :
             filteredTransactions = model.transactions.filter({ transaction in
-                transaction.date == model.getDateString()
+                transaction.day == model.getDateString().0
                 //historyTableView.reloadData()
             })
         case 1 :
             filteredTransactions = model.transactions.filter({ transaction in
-                transaction.date == model.getDateString()
+                (transaction.month ?? "") + (transaction.year ?? "") == model.getDateString().1 + model.getDateString().2
                 //historyTableView.reloadData()
             })
         case 2:
-            view.backgroundColor = .systemPink
+            filteredTransactions = model.transactions.filter({ transaction in
+                transaction.year == model.getDateString().2
+                //historyTableView.reloadData()
+            })
         default:
-            view.backgroundColor = .orange
+            filteredTransactions = model.transactions
         }
         
     }
@@ -225,7 +228,7 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = historyTableView.dequeueReusableHeaderFooterView(withIdentifier: "footer") as! CustomFooter
         let sum = model.calculateTotal(transactions: filteredTransactions)
-        view.configure(summ: "\(sum) $")
+        view.configure(summ: "\(sum) \(AppSettings.currency)")
         return view
     }
 }

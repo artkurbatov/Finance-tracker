@@ -13,19 +13,21 @@ class TransactionCell: UITableViewCell {
     private let transactionDate = UILabel()
     
     func configureCell(transactionToDisplay: Transaction) {
-        if let amount = transactionToDisplay.amount, let date = transactionToDisplay.date {
-            configureAmountLabel(amount: amount)
+        if let day = transactionToDisplay.day, let month = transactionToDisplay.month, let year = transactionToDisplay.year {
+            
+            let date = "\(day)/\(month)/\(year)"
+            configureAmountLabel(amount: transactionToDisplay.amount)
             configureDate(date: date)
         }
         
     }
     
-    private func configureAmountLabel(amount: String) {
+    private func configureAmountLabel(amount: Double) {
         
         addSubview(transactionAmount)
         
-        transactionAmount.text = amount + " $"
-        transactionAmount.textColor = amount.starts(with: "-") ? .systemRed : .systemGreen
+        transactionAmount.text = "\(amount) $"
+        transactionAmount.textColor = amount < 0 ? .systemRed : .systemGreen
         
         transactionAmount.translatesAutoresizingMaskIntoConstraints = false
         
