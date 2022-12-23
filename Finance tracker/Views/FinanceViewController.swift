@@ -13,8 +13,9 @@ class FinanceViewController: UIViewController {
     private let messageLabel = UILabel()
     private let totalAmountLabel = UILabel()
     
-    private let addButton = UIButton()
+    private let selectCurrency = UIButton()
     private let clearButton = UIButton()
+    private let addButton = UIButton()
     
     private let historyTableView = UITableView()
     
@@ -44,10 +45,11 @@ class FinanceViewController: UIViewController {
         filteredTransactions = model.transactions
 
         setupTitleLabel()
-        setupAddButton()
+        configureCurrencyButton()
         setupPickerView()
         configureTableView()
         configureClearButton()
+        configureAddButton()
     }
     
     // MARK: - Views setup
@@ -66,23 +68,21 @@ class FinanceViewController: UIViewController {
         titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
     }
     
-    private func setupAddButton() {
+    private func configureCurrencyButton() {
         
-        view.addSubview(addButton)
+        view.addSubview(selectCurrency)
         
-        addButton.setImage(UIImage(systemName: "plus.forwardslash.minus"), for: .normal)
+        selectCurrency.setImage(UIImage(systemName: "dollarsign"), for: .normal)
         
-        addButton.backgroundColor = .white
-        addButton.layer.cornerRadius = 5
+        selectCurrency.backgroundColor = .white
+        selectCurrency.layer.cornerRadius = 5
         
-        addButton.tintColor = .black
+        selectCurrency.tintColor = .black
         
-        addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        selectCurrency.translatesAutoresizingMaskIntoConstraints = false
         
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        addButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        selectCurrency.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        selectCurrency.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
     }
     
     private func setupPickerView() {
@@ -133,24 +133,42 @@ class FinanceViewController: UIViewController {
         clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
         clearButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+    }
+    
+    private func configureAddButton() {
+        
+        view.addSubview(addButton)
+        
+        addButton.configuration = .filled()
+        addButton.configuration?.cornerStyle = .capsule
+        addButton.configuration?.baseBackgroundColor = .systemBlue
+        addButton.configuration?.baseForegroundColor = .white
+        addButton.configuration?.title = "Add"
+        
+        addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
     }
 
     @objc private func addButtonAction() {
         
         let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
         
-        alert.addTextField()
+        alert.addTextField { textField in
+            textField.keyboardType = .decimalPad
+        }
+        
         
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
                 let amount = alert.textFields![0].text!
                 if let number = Double(amount) {
-//                    if !amount.contains(".") {
-//                        amount += ".0"
-//                    }
-                    // TODO: Change symbol for
-                    //amount += " $"
                     let dateString = self.model.getDateString()
                     self.model.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2, tableView: self.historyTableView)
                     self.filteredTransactions = self.model.transactions
@@ -166,29 +184,29 @@ class FinanceViewController: UIViewController {
         present(alert, animated: true)
     }
     
+#warning("picker doesn't work properly. For day it calculates number of satifying transactopns and takes this number of first transactions")
     @objc private func sortTransactions() {
         feedback.selectionChanged()
         
         switch periodPicker.selectedSegmentIndex {
         case 0 :
             filteredTransactions = model.transactions.filter({ transaction in
-                transaction.day == model.getDateString().0
-                //historyTableView.reloadData()
+                (transaction.day ?? "") + (transaction.month ?? "") + (transaction.year ?? "") == model.getDateString().0 + model.getDateString().1 + model.getDateString().2
             })
         case 1 :
             filteredTransactions = model.transactions.filter({ transaction in
                 (transaction.month ?? "") + (transaction.year ?? "") == model.getDateString().1 + model.getDateString().2
-                //historyTableView.reloadData()
             })
         case 2:
             filteredTransactions = model.transactions.filter({ transaction in
                 transaction.year == model.getDateString().2
-                //historyTableView.reloadData()
             })
+           
         default:
             filteredTransactions = model.transactions
         }
         
+        historyTableView.reloadData()
     }
     
     @objc private func clearButtonAction() {
