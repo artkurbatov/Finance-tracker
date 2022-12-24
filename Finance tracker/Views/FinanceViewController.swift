@@ -79,6 +79,8 @@ class FinanceViewController: UIViewController {
         
         selectCurrency.tintColor = .black
         
+        selectCurrency.addTarget(self, action: #selector(currencyAction), for: .touchUpInside)
+        
         selectCurrency.translatesAutoresizingMaskIntoConstraints = false
         
         selectCurrency.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
@@ -155,15 +157,19 @@ class FinanceViewController: UIViewController {
         addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
     }
+    
+    @objc private func currencyAction() {
+        model.createTestTransaction(tableView: historyTableView)
+        filteredTransactions = model.transactions
+    }
 
     @objc private func addButtonAction() {
         
         let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
         
         alert.addTextField { textField in
-            textField.keyboardType = .decimalPad
+            textField.keyboardType = .numbersAndPunctuation
         }
-        
         
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
@@ -195,7 +201,7 @@ class FinanceViewController: UIViewController {
             })
         case 1 :
             filteredTransactions = model.transactions.filter({ transaction in
-                (transaction.month ?? "") + (transaction.year ?? "") == model.getDateString().1 + model.getDateString().2
+                transaction.month == model.getDateString().1 && transaction.year == model.getDateString().2
             })
         case 2:
             filteredTransactions = model.transactions.filter({ transaction in

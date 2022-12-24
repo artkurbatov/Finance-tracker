@@ -7,7 +7,6 @@
 
 import UIKit
 import Foundation
-import CoreData
 
 class FinanceModel {
     
@@ -17,8 +16,14 @@ class FinanceModel {
     
     var transactions = [Transaction]()
 
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    func createTestTransaction(tableView: UITableView) {
+        
+        self.saveTransactions(amount: 20.0, day: "11", month: "12", year: "22", tableView: tableView)
+        self.saveTransactions(amount: -20.0, day: "7", month: "10", year: "22", tableView: tableView)
+        self.saveTransactions(amount: 11.0, day: "3", month: "6", year: "20", tableView: tableView)
+    }
     
     
     func createAlert(tableView: UITableView) -> UIAlertController {
@@ -52,7 +57,7 @@ class FinanceModel {
     func getDateString() -> (String, String, String) {
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
+        formatter.dateFormat = "dd/MM/yy"
         
         let date = Date()
         let dateString = formatter.string(from: date)
@@ -81,61 +86,28 @@ class FinanceModel {
     // MARK: - Core Data functions
     func fetchTransactions(tableView: UITableView) {
         
-        do {
-            self.transactions = try context.fetch(Transaction.fetchRequest())
+       
             
             DispatchQueue.main.async {
                 tableView.reloadData()
             }
-        }
-        catch {
-            //TODO: Error handler
-        }
     }
     
     func saveTransactions(amount: Double, day: String, month: String, year: String, tableView: UITableView) {
-        let transaction = Transaction(context: self.context)
-        transaction.amount = amount
-        transaction.day = day
-        transaction.month = month
-        transaction.year = year
-        
-        do {
-            try self.context.save()
-        }
-        catch {
-            //TODO: Error handler
-        }
+       
         
         fetchTransactions(tableView: tableView)
     }
     
     func deleteTransaction(transactionID: Int, tableView: UITableView) {
         
-        self.context.delete(transactions[transactionID])
-        
-        do {
-            try self.context.save()
-        }
-        catch {
-            //TODO: Error handler
-        }
         
         fetchTransactions(tableView: tableView)
     }
     
     func clearTransactions(tableView: UITableView) {
         
-        for transaction in transactions {
-            self.context.delete(transaction)
-        }
-        
-        do {
-            try self.context.save()
-        }
-        catch {
-            //TODO: Error handler
-        }
+        transactions.removeAll()
         
         fetchTransactions(tableView: tableView)
     }
