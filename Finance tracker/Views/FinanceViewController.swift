@@ -177,7 +177,7 @@ class FinanceViewController: UIViewController {
                 if let number = Double(amount) {
                     let dateString = self.model.getDateString()
                     self.model.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2, tableView: self.historyTableView)
-                    self.filteredTransactions = self.model.transactions
+                        //self.filteredTransactions = self.model.transactions
                 }
             }
         }
@@ -232,7 +232,7 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = historyTableView.dequeueReusableCell(withIdentifier: FinanceModel.identifier, for: indexPath) as? TransactionCell {
-            cell.configureCell(transactionToDisplay: model.transactions[indexPath.row])
+            cell.configureCell(transactionToDisplay: filteredTransactions[indexPath.row])
             return cell
         }
         else { return UITableViewCell() }

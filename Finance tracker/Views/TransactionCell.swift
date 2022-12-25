@@ -13,13 +13,13 @@ class TransactionCell: UITableViewCell {
     private let transactionDate = UILabel()
     
     func configureCell(transactionToDisplay: Transaction) {
-        if let day = transactionToDisplay.day, let month = transactionToDisplay.month, let year = transactionToDisplay.year {
-            
-            let date = "\(day)/\(month)/\(year)"
-            configureAmountLabel(amount: transactionToDisplay.amount)
-            configureDate(date: date)
-        }
+        let day = transactionToDisplay.day
+        let month = transactionToDisplay.month
+        let year = transactionToDisplay.year
         
+        let date = "\(day)/\(month)/\(year)"
+        configureAmountLabel(amount: transactionToDisplay.amount)
+        configureDate(date: date)
     }
     
     private func configureAmountLabel(amount: Double) {

@@ -8,15 +8,19 @@
 import UIKit
 import Foundation
 
+
+protocol FinaceModelDelegate {
+    
+}
+
+
 class FinanceModel {
     
-    #warning("max 2 digits after dot")
+    #warning("")
     
     static let identifier = "transactionCell"
     
     var transactions = [Transaction]()
-
-    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func createTestTransaction(tableView: UITableView) {
         
@@ -95,6 +99,7 @@ class FinanceModel {
     
     func saveTransactions(amount: Double, day: String, month: String, year: String, tableView: UITableView) {
        
+        transactions.append(Transaction(amount: amount, day: day, month: month, year: year))
         
         fetchTransactions(tableView: tableView)
     }
