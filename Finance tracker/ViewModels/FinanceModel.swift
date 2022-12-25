@@ -11,12 +11,17 @@ import Foundation
 
 protocol FinaceModelDelegate {
     
+    func filterTransactions()
+    
+    func updateHistoryTableView()
 }
 
 
 class FinanceModel {
     
     #warning("")
+    
+    var delegate: FinaceModelDelegate?
     
     static let identifier = "transactionCell"
     
