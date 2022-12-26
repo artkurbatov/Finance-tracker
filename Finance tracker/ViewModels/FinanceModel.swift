@@ -19,7 +19,7 @@ protocol FinaceModelDelegate {
 
 class FinanceModel {
     
-    #warning("")
+#warning("")
     
     var delegate: FinaceModelDelegate?
     
@@ -27,11 +27,11 @@ class FinanceModel {
     
     var transactions = [Transaction]()
     
-    func createTestTransaction(tableView: UITableView) {
+    func createTestTransaction() {
         
-        self.saveTransactions(amount: 20.0, day: "11", month: "12", year: "22", tableView: tableView)
-        self.saveTransactions(amount: -20.0, day: "7", month: "10", year: "22", tableView: tableView)
-        self.saveTransactions(amount: 11.0, day: "3", month: "6", year: "20", tableView: tableView)
+        self.saveTransactions(amount: 20.0, day: "11", month: "12", year: "22")
+        self.saveTransactions(amount: -20.0, day: "7", month: "10", year: "22")
+        self.saveTransactions(amount: 11.0, day: "3", month: "6", year: "20")
     }
     
     
@@ -45,13 +45,13 @@ class FinanceModel {
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
                 let amount = alert.textFields![0].text!
                 if let number = Double(amount) {
-//                    if !amount.contains(".") {
-//                        amount += ".0"
-//                    }
+                    //                    if !amount.contains(".") {
+                    //                        amount += ".0"
+                    //                    }
                     // TODO: Change symbol for
                     //amount += " $"
                     let dateString = self.getDateString()
-                    self.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2, tableView: tableView)
+                    self.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2)
                 }
             }
         }
@@ -93,33 +93,30 @@ class FinanceModel {
     
     
     // MARK: - Core Data functions
-    func fetchTransactions(tableView: UITableView) {
+    func fetchTransactions() {
         
-       
-            
-            DispatchQueue.main.async {
-                tableView.reloadData()
-            }
+        delegate?.filterTransactions()
+        delegate?.updateHistoryTableView()
     }
     
-    func saveTransactions(amount: Double, day: String, month: String, year: String, tableView: UITableView) {
-       
+    func saveTransactions(amount: Double, day: String, month: String, year: String) {
+        
         transactions.append(Transaction(amount: amount, day: day, month: month, year: year))
         
-        fetchTransactions(tableView: tableView)
+        fetchTransactions()
     }
     
-    func deleteTransaction(transactionID: Int, tableView: UITableView) {
+    func deleteTransaction(transactionID: Int) {
         
         
-        fetchTransactions(tableView: tableView)
+        fetchTransactions()
     }
     
-    func clearTransactions(tableView: UITableView) {
+    func clearTransactions() {
         
         transactions.removeAll()
         
-        fetchTransactions(tableView: tableView)
+        fetchTransactions()
     }
     
 }

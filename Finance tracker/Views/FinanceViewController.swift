@@ -8,7 +8,7 @@
 import UIKit
 
 class FinanceViewController: UIViewController {
-    
+   
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
     private let totalAmountLabel = UILabel()
@@ -37,10 +37,11 @@ class FinanceViewController: UIViewController {
         view.backgroundColor = .systemBackground
         historyTableView.delegate = self
         historyTableView.dataSource = self
+        model.delegate = self
         
         feedback.prepare()
                 
-        model.fetchTransactions(tableView: historyTableView)
+        model.fetchTransactions()
         
         filteredTransactions = model.transactions
 
@@ -159,7 +160,7 @@ class FinanceViewController: UIViewController {
     }
     
     @objc private func currencyAction() {
-        model.createTestTransaction(tableView: historyTableView)
+        model.createTestTransaction()
         filteredTransactions = model.transactions
     }
 
@@ -176,7 +177,7 @@ class FinanceViewController: UIViewController {
                 let amount = alert.textFields![0].text!
                 if let number = Double(amount) {
                     let dateString = self.model.getDateString()
-                    self.model.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2, tableView: self.historyTableView)
+                    self.model.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2)
                         //self.filteredTransactions = self.model.transactions
                 }
             }
@@ -192,12 +193,25 @@ class FinanceViewController: UIViewController {
     
 #warning("picker doesn't work properly. For day it calculates number of satifying transactopns and takes this number of first transactions")
     @objc private func sortTransactions() {
-        feedback.selectionChanged()
         
+        model.fetchTransactions()
+    }
+    
+    @objc private func clearButtonAction() {
+        if !model.transactions.isEmpty {
+            model.clearTransactions()
+            filteredTransactions = []
+        }
+    }
+}
+
+extension FinanceViewController: FinaceModelDelegate {
+    
+    func filterTransactions() {
         switch periodPicker.selectedSegmentIndex {
         case 0 :
             filteredTransactions = model.transactions.filter({ transaction in
-                (transaction.day ?? "") + (transaction.month ?? "") + (transaction.year ?? "") == model.getDateString().0 + model.getDateString().1 + model.getDateString().2
+                transaction.day + transaction.month + transaction.year == model.getDateString().0 + model.getDateString().1 + model.getDateString().2
             })
         case 1 :
             filteredTransactions = model.transactions.filter({ transaction in
@@ -211,15 +225,10 @@ class FinanceViewController: UIViewController {
         default:
             filteredTransactions = model.transactions
         }
-        
-        historyTableView.reloadData()
     }
     
-    @objc private func clearButtonAction() {
-        if !model.transactions.isEmpty {
-            model.clearTransactions(tableView: historyTableView)
-            filteredTransactions = []
-        }
+    func updateHistoryTableView() {
+        historyTableView.reloadData()
     }
 }
 
@@ -241,7 +250,7 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let action = UIContextualAction(style: .destructive, title: "delete") { _, _, _ in
-            self.model.deleteTransaction(transactionID: indexPath.row, tableView: self.historyTableView)
+            self.model.deleteTransaction(transactionID: indexPath.row)
             self.filteredTransactions = self.model.transactions
         }
         
