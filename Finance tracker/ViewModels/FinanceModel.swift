@@ -22,7 +22,7 @@ class FinanceModel {
     static let identifier = "transactionCell"
     
     var transactions = [Transaction]()
-    
+
     func createTestTransaction() {
         
         self.saveTransactions(amount: 20.0, day: "11", month: "12", year: "22")
@@ -86,7 +86,22 @@ class FinanceModel {
     
     
     // MARK: - Data functions
-    func fetchTransactions() {
+    
+    private func saveData() {
+        if let encoded = try? JSONEncoder().encode(transactions) {
+            UserDefaults.standard.set(encoded, forKey: AppSettings.userDefaultsKey)
+        }
+    }
+        
+    func loadTransactions() {
+        
+        if let data = UserDefaults.standard.data(forKey: AppSettings.userDefaultsKey) {
+            
+            if let decoded = try? JSONDecoder().decode([Transaction].self, from: data) {
+                
+                transactions = decoded
+            }
+        }
         
         delegate?.filterTransactions()
     }
@@ -94,20 +109,21 @@ class FinanceModel {
     func saveTransactions(amount: Double, day: String, month: String, year: String) {
         
         transactions.append(Transaction(amount: amount, day: day, month: month, year: year))
-        
-        fetchTransactions()
+        saveData()
+        delegate?.filterTransactions()
     }
-    
+        
     func deleteTransaction(transactionID: Int) {
         
-        fetchTransactions()
+        saveData()
+        delegate?.filterTransactions()
     }
     
     func clearTransactions() {
         
         transactions.removeAll()
-        
-        fetchTransactions()
+        saveData()
+        delegate?.filterTransactions()
     }
 }
 

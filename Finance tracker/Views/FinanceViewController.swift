@@ -41,10 +41,8 @@ class FinanceViewController: UIViewController {
         
         feedback.prepare()
                 
-        model.fetchTransactions()
-        
-        filteredTransactions = model.transactions
-
+        model.loadTransactions()
+    
         setupTitleLabel()
         configureCurrencyButton()
         setupPickerView()
@@ -173,7 +171,7 @@ class FinanceViewController: UIViewController {
     
     @objc private func sortTransactions() {
         
-        model.fetchTransactions()
+        model.loadTransactions()
     }
     
     @objc private func clearButtonAction() {
