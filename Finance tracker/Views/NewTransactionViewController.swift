@@ -18,8 +18,4 @@ class NewTransactionViewController: UIViewController {
         super.viewDidLoad()
 
     }
-    
-    
-    
-    
 }

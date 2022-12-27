@@ -166,32 +166,11 @@ class FinanceViewController: UIViewController {
 
     @objc private func addButtonAction() {
         
-        let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
+        let alert = model.createAlert()
         
-        alert.addTextField { textField in
-            textField.keyboardType = .numbersAndPunctuation
-        }
-        
-        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
-            if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
-                let amount = alert.textFields![0].text!
-                if let number = Double(amount) {
-                    let dateString = self.model.getDateString()
-                    self.model.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2)
-                        //self.filteredTransactions = self.model.transactions
-                }
-            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alert.addAction(addAction)
-        alert.addAction(cancelAction)
-        
-//        let alert = model.createAlert(tableView: historyTableView)
         present(alert, animated: true)
     }
     
-#warning("picker doesn't work properly. For day it calculates number of satifying transactopns and takes this number of first transactions")
     @objc private func sortTransactions() {
         
         model.fetchTransactions()
@@ -225,9 +204,7 @@ extension FinanceViewController: FinaceModelDelegate {
         default:
             filteredTransactions = model.transactions
         }
-    }
-    
-    func updateHistoryTableView() {
+        
         historyTableView.reloadData()
     }
 }

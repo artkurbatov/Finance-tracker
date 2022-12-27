@@ -12,15 +12,11 @@ import Foundation
 protocol FinaceModelDelegate {
     
     func filterTransactions()
-    
-    func updateHistoryTableView()
 }
 
 
 class FinanceModel {
-    
-#warning("")
-    
+        
     var delegate: FinaceModelDelegate?
     
     static let identifier = "transactionCell"
@@ -35,21 +31,18 @@ class FinanceModel {
     }
     
     
-    func createAlert(tableView: UITableView) -> UIAlertController {
+    func createAlert() -> UIAlertController {
         
         let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
         
-        alert.addTextField()
+        alert.addTextField { textField in
+            textField.keyboardType = .numbersAndPunctuation
+        }
         
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
                 let amount = alert.textFields![0].text!
                 if let number = Double(amount) {
-                    //                    if !amount.contains(".") {
-                    //                        amount += ".0"
-                    //                    }
-                    // TODO: Change symbol for
-                    //amount += " $"
                     let dateString = self.getDateString()
                     self.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2)
                 }
@@ -59,7 +52,7 @@ class FinanceModel {
         
         alert.addAction(addAction)
         alert.addAction(cancelAction)
-        
+    
         return alert
     }
     
@@ -92,11 +85,10 @@ class FinanceModel {
     }
     
     
-    // MARK: - Core Data functions
+    // MARK: - Data functions
     func fetchTransactions() {
         
         delegate?.filterTransactions()
-        delegate?.updateHistoryTableView()
     }
     
     func saveTransactions(amount: Double, day: String, month: String, year: String) {
@@ -108,7 +100,6 @@ class FinanceModel {
     
     func deleteTransaction(transactionID: Int) {
         
-        
         fetchTransactions()
     }
     
@@ -118,7 +109,6 @@ class FinanceModel {
         
         fetchTransactions()
     }
-    
 }
 
 extension Double {
