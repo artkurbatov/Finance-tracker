@@ -9,7 +9,7 @@ import Foundation
 
 struct Transaction: Codable {
     
-    let id = UUID()
+    var id = UUID()
     var amount: Double
     var day: String
     var month: String

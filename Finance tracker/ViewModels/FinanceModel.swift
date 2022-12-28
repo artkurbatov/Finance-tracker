@@ -84,6 +84,24 @@ class FinanceModel {
         return total.round(to: 2)
     }
     
+    func selectCurrencyMenu() ->UIMenu {
+        
+        let dollar = UIAction(title: "Dollar", image: UIImage(systemName: "dollarsign")) { _ in
+            AppSettings.currency = "$"
+        }
+        
+        let ruble = UIAction(title: "Ruble", image: UIImage(systemName: "rublesign")) { _ in
+            AppSettings.currency = "₽‎"
+        }
+        
+        
+        
+        
+        let menu = UIMenu(title: "Select your currency", children: [dollar,ruble])
+        
+        return menu
+    }
+    
     
     // MARK: - Data functions
     

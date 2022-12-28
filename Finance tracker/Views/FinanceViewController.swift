@@ -13,7 +13,7 @@ class FinanceViewController: UIViewController {
     private let messageLabel = UILabel()
     private let totalAmountLabel = UILabel()
     
-    private let selectCurrency = UIButton()
+    private let selectCurrencyButton = UIButton()
     private let clearButton = UIButton()
     private let addButton = UIButton()
     
@@ -69,21 +69,22 @@ class FinanceViewController: UIViewController {
     
     private func configureCurrencyButton() {
         
-        view.addSubview(selectCurrency)
+        view.addSubview(selectCurrencyButton)
         
-        selectCurrency.setImage(UIImage(systemName: "dollarsign"), for: .normal)
+        selectCurrencyButton.setImage(UIImage(systemName: "dollarsign"), for: .normal)
         
-        selectCurrency.backgroundColor = .white
-        selectCurrency.layer.cornerRadius = 5
+        selectCurrencyButton.showsMenuAsPrimaryAction = true
+        selectCurrencyButton.menu = model.selectCurrencyMenu()
         
-        selectCurrency.tintColor = .black
+        selectCurrencyButton.backgroundColor = .white
+        selectCurrencyButton.layer.cornerRadius = 5
         
-        selectCurrency.addTarget(self, action: #selector(currencyAction), for: .touchUpInside)
+        selectCurrencyButton.tintColor = .black
+            
+        selectCurrencyButton.translatesAutoresizingMaskIntoConstraints = false
         
-        selectCurrency.translatesAutoresizingMaskIntoConstraints = false
-        
-        selectCurrency.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        selectCurrency.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        selectCurrencyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        selectCurrencyButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
     }
     
     private func setupPickerView() {
@@ -157,11 +158,6 @@ class FinanceViewController: UIViewController {
         addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
     }
     
-    @objc private func currencyAction() {
-        model.createTestTransaction()
-        filteredTransactions = model.transactions
-    }
-
     @objc private func addButtonAction() {
         
         let alert = model.createAlert()
