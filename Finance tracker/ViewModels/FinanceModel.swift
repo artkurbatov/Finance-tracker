@@ -22,6 +22,14 @@ class FinanceModel {
     static let identifier = "transactionCell"
     
     var transactions = [Transaction]()
+    
+    private let currencyList = [
+        (currencyTitle: "Dollar", currencyImageName: "dollarsign", currencySign: "$"),
+        (currencyTitle: "Euro", currencyImageName: "eurosign", currencySign: "€"),
+        (currencyTitle: "Sterling", currencyImageName: "sterlingsign", currencySign: "£"),
+        (currencyTitle: "Yen", currencyImageName: "yensign", currencySign: "¥"),
+        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽‎"),
+    ]
 
     func createTestTransaction() {
         
@@ -84,42 +92,36 @@ class FinanceModel {
         return total.round(to: 2)
     }
     
+    func setCurrencyImage(button: UIButton) {
+        
+        var imageName = ""
+        
+        switch AppSettings.currency {
+        case "€":
+            imageName = "eurosign"
+        default:
+            imageName = "dollarsign"
+        }
+        
+        button.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     func selectCurrencyMenu(button: UIButton) ->UIMenu {
         
-        let dollar = UIAction(title: "Dollar", image: UIImage(systemName: "dollarsign")) { _ in
-            AppSettings.currency = "$"
-            self.delegate?.filterTransactions()
-            button.setImage(UIImage(systemName: "dollarsign"), for: .normal)
+        var actions = [UIAction]()
+        
+        for currency in currencyList {
+            let action = UIAction(title: currency.currencyTitle, image: UIImage(systemName: currency.currencyImageName)) { _ in
+                AppSettings.currency = currency.currencySign
+                self.delegate?.filterTransactions()
+                button.setImage(UIImage(systemName: currency.currencyImageName), for: .normal)
+                self.saveCurrency()
+            }
+            
+            actions.append(action)
         }
         
-        let euro = UIAction(title: "Euro", image: UIImage(systemName: "eurosign")) { _ in
-            AppSettings.currency = "€"
-            self.delegate?.filterTransactions()
-            button.setImage(UIImage(systemName: "eurosign"), for: .normal)
-        }
-        
-        let sterling = UIAction(title: "Sterling", image: UIImage(systemName: "sterlingsign")) { _ in
-            AppSettings.currency = "£"
-            self.delegate?.filterTransactions()
-            button.setImage(UIImage(systemName: "sterlingsign"), for: .normal)
-        }
-        
-        let yen = UIAction(title: "Yen", image: UIImage(systemName: "yensign")) { _ in
-            AppSettings.currency = "¥"
-            self.delegate?.filterTransactions()
-            button.setImage(UIImage(systemName: "yensign"), for: .normal)
-        }
-        
-        let ruble = UIAction(title: "Ruble", image: UIImage(systemName: "rublesign")) { _ in
-            AppSettings.currency = "₽‎"
-            self.delegate?.filterTransactions()
-            button.setImage(UIImage(systemName: "rublesign"), for: .normal)
-        }
-        
-        
-        
-        
-        let menu = UIMenu(title: "Select your currency", children: [dollar, euro, sterling, yen, ruble])
+        let menu = UIMenu(title: "Select your currency", children: actions)
         
         return menu
     }
@@ -129,13 +131,13 @@ class FinanceModel {
     
     private func saveData() {
         if let encoded = try? JSONEncoder().encode(transactions) {
-            UserDefaults.standard.set(encoded, forKey: AppSettings.userDefaultsKey)
+            UserDefaults.standard.set(encoded, forKey: AppSettings.transactionsKey)
         }
     }
         
     func loadTransactions() {
         
-        if let data = UserDefaults.standard.data(forKey: AppSettings.userDefaultsKey) {
+        if let data = UserDefaults.standard.data(forKey: AppSettings.transactionsKey) {
             
             if let decoded = try? JSONDecoder().decode([Transaction].self, from: data) {
                 
@@ -144,6 +146,24 @@ class FinanceModel {
         }
         
         delegate?.filterTransactions()
+    }
+    
+    func saveCurrency() {
+        
+        if let encoded = try? JSONEncoder().encode(AppSettings.currency) {
+            UserDefaults.standard.set(encoded, forKey: AppSettings.currancyKey)
+        }
+    }
+    
+    func getUserCurrency() {
+        
+        if let data = UserDefaults.standard.data(forKey: AppSettings.currancyKey) {
+            
+            if let decoded = try? JSONDecoder().decode(String.self, from: data) {
+                
+                AppSettings.currency = decoded
+            }
+        }
     }
     
     func saveTransactions(amount: Double, day: String, month: String, year: String) {

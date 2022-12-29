@@ -43,6 +43,7 @@ class FinanceViewController: UIViewController {
         feedback.prepare()
                 
         model.loadTransactions()
+        model.getUserCurrency()
     
         setupTitleLabel()
         configureCurrencyButton()
@@ -73,12 +74,13 @@ class FinanceViewController: UIViewController {
         
         view.addSubview(selectCurrencyButton)
         
-        selectCurrencyButton.setImage(UIImage(systemName: "dollarsign"), for: .normal)
+        //TODO: Consider replacing this function
+        model.setCurrencyImage(button: selectCurrencyButton)
         
-        //selectCurrencyButton.showsMenuAsPrimaryAction = true
-        //selectCurrencyButton.menu = model.selectCurrencyMenu(button: selectCurrencyButton)
+        selectCurrencyButton.showsMenuAsPrimaryAction = true
+        selectCurrencyButton.menu = model.selectCurrencyMenu(button: selectCurrencyButton)
         
-        selectCurrencyButton.addTarget(self, action: #selector(selectCurrencyAction), for: .touchUpInside)
+        //selectCurrencyButton.addTarget(self, action: #selector(selectCurrencyAction), for: .touchUpInside)
         
         // Settings for dark mode
         selectCurrencyButton.backgroundColor = .white
@@ -198,7 +200,6 @@ class FinanceViewController: UIViewController {
         }
         
         present(selectCurrencyVC, animated: true)
-        
     }
     
     @objc private func addButtonAction() {

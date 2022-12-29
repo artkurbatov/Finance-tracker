@@ -13,7 +13,7 @@ class SelectCurrencyViewController: UIViewController {
     private let currencyPicker = UIPickerView()
     private let okButton = UIButton()
     
-    private let currencyList = ["Dollar $", "Euro €", "Sterling £", "Yen ¥", "Ruble ₽‎"]
+    private let currencyList = ["Dollar $", "Euro €", "Sterling £", "Yen ¥", "Ruble ₽"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +89,11 @@ class SelectCurrencyViewController: UIViewController {
         
         print("\(currencyList[selectedRow].last!)")
         
-        //AppSettings.currency = currencyList[selectedRow].last
+        AppSettings.currency = "\(currencyList[selectedRow].last!)"
+        
+        //TODO: Update table view and button ImageView
+        
+        dismiss(animated: true)
     }
 }
 

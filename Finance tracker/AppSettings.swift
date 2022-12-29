@@ -10,6 +10,7 @@ import Foundation
 class AppSettings {
     
     static var currency = "$"
-    static let userDefaultsKey = "Transactions"
     
+    static let transactionsKey = "Transactions"
+    static let currancyKey = "Currency"
 }
