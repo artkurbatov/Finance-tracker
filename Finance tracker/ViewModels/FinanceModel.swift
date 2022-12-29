@@ -84,14 +84,18 @@ class FinanceModel {
         return total.round(to: 2)
     }
     
-    func selectCurrencyMenu() ->UIMenu {
+    func selectCurrencyMenu(button: UIButton) ->UIMenu {
         
         let dollar = UIAction(title: "Dollar", image: UIImage(systemName: "dollarsign")) { _ in
             AppSettings.currency = "$"
+            self.delegate?.filterTransactions()
+            button.setImage(UIImage(systemName: "dollarsign"), for: .normal)
         }
         
         let ruble = UIAction(title: "Ruble", image: UIImage(systemName: "rublesign")) { _ in
             AppSettings.currency = "₽‎"
+            self.delegate?.filterTransactions()
+            button.setImage(UIImage(systemName: "rublesign"), for: .normal)
         }
         
         
@@ -131,10 +135,15 @@ class FinanceModel {
         delegate?.filterTransactions()
     }
         
-    func deleteTransaction(transactionID: Int) {
+    func deleteTransaction(transactionID: UUID) {
         
-        saveData()
-        delegate?.filterTransactions()
+        if let index = transactions.firstIndex(where: { transaction in
+            transaction.id == transactionID
+        }) {
+            self.transactions.remove(at: index)
+            saveData()
+            delegate?.filterTransactions()
+        }
     }
     
     func clearTransactions() {
@@ -143,6 +152,13 @@ class FinanceModel {
         saveData()
         delegate?.filterTransactions()
     }
+    
+    func sortTransactions() {
+        
+        transactions.reverse()
+        delegate?.filterTransactions()
+    }
+    
 }
 
 extension Double {

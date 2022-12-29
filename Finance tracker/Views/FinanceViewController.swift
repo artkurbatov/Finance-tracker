@@ -16,13 +16,14 @@ class FinanceViewController: UIViewController {
     private let selectCurrencyButton = UIButton()
     private let clearButton = UIButton()
     private let addButton = UIButton()
+    private let sortButton = UIButton()
     
     private let historyTableView = UITableView()
     
     private let periodPicker: UISegmentedControl = {
         let view = UISegmentedControl(items: ["Day", "Month", "Year", "All time"])
         view.selectedSegmentIndex = 3
-        view.addTarget(self, action: #selector(sortTransactions), for: .valueChanged)
+        view.addTarget(self, action: #selector(reloadTransactions), for: .valueChanged)
         return view
     }()
     
@@ -45,6 +46,7 @@ class FinanceViewController: UIViewController {
     
         setupTitleLabel()
         configureCurrencyButton()
+        configureSortButton()
         setupPickerView()
         configureTableView()
         configureClearButton()
@@ -74,8 +76,9 @@ class FinanceViewController: UIViewController {
         selectCurrencyButton.setImage(UIImage(systemName: "dollarsign"), for: .normal)
         
         selectCurrencyButton.showsMenuAsPrimaryAction = true
-        selectCurrencyButton.menu = model.selectCurrencyMenu()
+        selectCurrencyButton.menu = model.selectCurrencyMenu(button: selectCurrencyButton)
         
+        // Settings for dark mode
         selectCurrencyButton.backgroundColor = .white
         selectCurrencyButton.layer.cornerRadius = 5
         
@@ -84,7 +87,27 @@ class FinanceViewController: UIViewController {
         selectCurrencyButton.translatesAutoresizingMaskIntoConstraints = false
         
         selectCurrencyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        selectCurrencyButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        selectCurrencyButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        selectCurrencyButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+    }
+    
+    private func configureSortButton() {
+        
+        view.addSubview(sortButton)
+        
+        sortButton.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
+        sortButton.addTarget(self, action: #selector(sortTransaction), for: .touchUpInside)
+        
+        sortButton.backgroundColor = .white
+        sortButton.layer.cornerRadius = 5
+        
+        sortButton.tintColor = .black
+        
+        sortButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        sortButton.trailingAnchor.constraint(equalTo: selectCurrencyButton.leadingAnchor, constant: -20).isActive = true
+        sortButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        sortButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
     }
     
     private func setupPickerView() {
@@ -158,14 +181,21 @@ class FinanceViewController: UIViewController {
         addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
     }
     
+    @objc private func sortTransaction() {
+        
+        model.sortTransactions()
+    }
+    
     @objc private func addButtonAction() {
         
         let alert = model.createAlert()
         
+        //model.createTestTransaction()
+        
         present(alert, animated: true)
     }
     
-    @objc private func sortTransactions() {
+    @objc private func reloadTransactions() {
         
         model.loadTransactions()
     }
@@ -173,7 +203,6 @@ class FinanceViewController: UIViewController {
     @objc private func clearButtonAction() {
         if !model.transactions.isEmpty {
             model.clearTransactions()
-            filteredTransactions = []
         }
     }
 }
@@ -221,8 +250,8 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let action = UIContextualAction(style: .destructive, title: "delete") { _, _, _ in
-            self.model.deleteTransaction(transactionID: indexPath.row)
-            self.filteredTransactions = self.model.transactions
+            let transaction = self.filteredTransactions[indexPath.row]
+            self.model.deleteTransaction(transactionID: transaction.id)
         }
         
         return UISwipeActionsConfiguration(actions: [action])

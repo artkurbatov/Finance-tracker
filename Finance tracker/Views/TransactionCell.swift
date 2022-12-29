@@ -26,7 +26,7 @@ class TransactionCell: UITableViewCell {
         
         addSubview(transactionAmount)
         
-        transactionAmount.text = "\(amount) $"
+        transactionAmount.text = "\(amount) \(AppSettings.currency)"
         transactionAmount.textColor = amount < 0 ? .systemRed : .systemGreen
         
         transactionAmount.translatesAutoresizingMaskIntoConstraints = false
