@@ -75,8 +75,10 @@ class FinanceViewController: UIViewController {
         
         selectCurrencyButton.setImage(UIImage(systemName: "dollarsign"), for: .normal)
         
-        selectCurrencyButton.showsMenuAsPrimaryAction = true
-        selectCurrencyButton.menu = model.selectCurrencyMenu(button: selectCurrencyButton)
+        //selectCurrencyButton.showsMenuAsPrimaryAction = true
+        //selectCurrencyButton.menu = model.selectCurrencyMenu(button: selectCurrencyButton)
+        
+        selectCurrencyButton.addTarget(self, action: #selector(selectCurrencyAction), for: .touchUpInside)
         
         // Settings for dark mode
         selectCurrencyButton.backgroundColor = .white
@@ -186,6 +188,19 @@ class FinanceViewController: UIViewController {
         model.sortTransactions()
     }
     
+    @objc private func selectCurrencyAction() {
+        
+        let selectCurrencyVC = SelectCurrencyViewController()
+        
+        if let sheet = selectCurrencyVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(selectCurrencyVC, animated: true)
+        
+    }
+    
     @objc private func addButtonAction() {
         
         let alert = model.createAlert()
@@ -256,7 +271,6 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UISwipeActionsConfiguration(actions: [action])
     }
-    
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = historyTableView.dequeueReusableHeaderFooterView(withIdentifier: "footer") as! CustomFooter

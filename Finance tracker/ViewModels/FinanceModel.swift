@@ -92,6 +92,24 @@ class FinanceModel {
             button.setImage(UIImage(systemName: "dollarsign"), for: .normal)
         }
         
+        let euro = UIAction(title: "Euro", image: UIImage(systemName: "eurosign")) { _ in
+            AppSettings.currency = "€"
+            self.delegate?.filterTransactions()
+            button.setImage(UIImage(systemName: "eurosign"), for: .normal)
+        }
+        
+        let sterling = UIAction(title: "Sterling", image: UIImage(systemName: "sterlingsign")) { _ in
+            AppSettings.currency = "£"
+            self.delegate?.filterTransactions()
+            button.setImage(UIImage(systemName: "sterlingsign"), for: .normal)
+        }
+        
+        let yen = UIAction(title: "Yen", image: UIImage(systemName: "yensign")) { _ in
+            AppSettings.currency = "¥"
+            self.delegate?.filterTransactions()
+            button.setImage(UIImage(systemName: "yensign"), for: .normal)
+        }
+        
         let ruble = UIAction(title: "Ruble", image: UIImage(systemName: "rublesign")) { _ in
             AppSettings.currency = "₽‎"
             self.delegate?.filterTransactions()
@@ -101,7 +119,7 @@ class FinanceModel {
         
         
         
-        let menu = UIMenu(title: "Select your currency", children: [dollar,ruble])
+        let menu = UIMenu(title: "Select your currency", children: [dollar, euro, sterling, yen, ruble])
         
         return menu
     }
