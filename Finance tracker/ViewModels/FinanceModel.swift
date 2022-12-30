@@ -28,8 +28,11 @@ class FinanceModel {
         (currencyTitle: "Euro", currencyImageName: "eurosign", currencySign: "€"),
         (currencyTitle: "Sterling", currencyImageName: "sterlingsign", currencySign: "£"),
         (currencyTitle: "Yen", currencyImageName: "yensign", currencySign: "¥"),
-        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽‎"),
+        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽"),
     ]
+    
+    
+    
 
     func createTestTransaction() {
         
@@ -92,6 +95,8 @@ class FinanceModel {
         return total.round(to: 2)
     }
     
+    // MARK: - Currency section
+    
     func setCurrencyImage(button: UIButton) {
         
         var imageName = ""
@@ -99,6 +104,12 @@ class FinanceModel {
         switch AppSettings.currency {
         case "€":
             imageName = "eurosign"
+        case "£":
+            imageName = "sterlingsign"
+        case "¥":
+            imageName = "yensign"
+        case "₽":
+            imageName = "rublesign"
         default:
             imageName = "dollarsign"
         }
@@ -127,7 +138,7 @@ class FinanceModel {
     }
     
     
-    // MARK: - Data functions
+    // MARK: - User defaults functions
     
     private func saveData() {
         if let encoded = try? JSONEncoder().encode(transactions) {
@@ -144,7 +155,6 @@ class FinanceModel {
                 transactions = decoded
             }
         }
-        
         delegate?.filterTransactions()
     }
     
@@ -165,6 +175,9 @@ class FinanceModel {
             }
         }
     }
+    
+    
+    //MARK: - Transactions section
     
     func saveTransactions(amount: Double, day: String, month: String, year: String) {
         
@@ -196,7 +209,6 @@ class FinanceModel {
         transactions.reverse()
         delegate?.filterTransactions()
     }
-    
 }
 
 extension Double {

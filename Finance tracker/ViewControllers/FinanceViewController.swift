@@ -206,7 +206,7 @@ class FinanceViewController: UIViewController {
         
         let alert = model.createAlert()
         
-        //model.createTestTransaction()
+     //   model.createTestTransaction()
         
         present(alert, animated: true)
     }
@@ -239,7 +239,6 @@ extension FinanceViewController: FinaceModelDelegate {
             filteredTransactions = model.transactions.filter({ transaction in
                 transaction.year == model.getDateString().2
             })
-           
         default:
             filteredTransactions = model.transactions
         }
