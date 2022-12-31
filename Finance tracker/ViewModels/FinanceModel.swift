@@ -29,6 +29,7 @@ class FinanceModel {
         (currencyTitle: "Sterling", currencyImageName: "sterlingsign", currencySign: "£"),
         (currencyTitle: "Yen", currencyImageName: "yensign", currencySign: "¥"),
         (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽"),
+        (currencyTitle: "Rupee", currencyImageName: "indianrupeesign", currencySign: "₹"),
     ]
     
     
@@ -110,6 +111,8 @@ class FinanceModel {
             imageName = "yensign"
         case "₽":
             imageName = "rublesign"
+        case "₹":
+            imageName = "indianrupeesign"
         default:
             imageName = "dollarsign"
         }
