@@ -14,8 +14,8 @@ class CustomFooter: UITableViewHeaderFooterView {
     let amount = UILabel()
     
     override init(reuseIdentifier: String?) {
-            super.init(reuseIdentifier: reuseIdentifier)
-        }
+        super.init(reuseIdentifier: reuseIdentifier)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

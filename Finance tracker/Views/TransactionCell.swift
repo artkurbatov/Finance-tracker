@@ -49,9 +49,4 @@ class TransactionCell: UITableViewCell {
         transactionDate.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         transactionDate.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
     }
-    
-    private func configureCategory(categoty: String) {
-        
-    }
-    
 }

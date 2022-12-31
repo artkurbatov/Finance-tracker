@@ -16,7 +16,7 @@ protocol FinaceModelDelegate {
 
 
 class FinanceModel {
-        
+    
     var delegate: FinaceModelDelegate?
     
     static let identifier = "transactionCell"
@@ -34,7 +34,7 @@ class FinanceModel {
     
     
     
-
+    
     func createTestTransaction() {
         
         self.saveTransactions(amount: 20.0, day: "11", month: "12", year: "22")
@@ -64,7 +64,7 @@ class FinanceModel {
         
         alert.addAction(addAction)
         alert.addAction(cancelAction)
-    
+        
         return alert
     }
     
@@ -148,7 +148,7 @@ class FinanceModel {
             UserDefaults.standard.set(encoded, forKey: AppSettings.transactionsKey)
         }
     }
-        
+    
     func loadTransactions() {
         
         if let data = UserDefaults.standard.data(forKey: AppSettings.transactionsKey) {
@@ -179,7 +179,6 @@ class FinanceModel {
         }
     }
     
-    
     //MARK: - Transactions section
     
     func saveTransactions(amount: Double, day: String, month: String, year: String) {
@@ -188,7 +187,7 @@ class FinanceModel {
         saveData()
         delegate?.filterTransactions()
     }
-        
+    
     func deleteTransaction(transactionID: UUID) {
         
         if let index = transactions.firstIndex(where: { transaction in

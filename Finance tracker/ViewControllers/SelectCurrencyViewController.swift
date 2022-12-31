@@ -14,10 +14,10 @@ class SelectCurrencyViewController: UIViewController {
     private let okButton = UIButton()
     
     private let currencyList = ["Dollar $", "Euro €", "Sterling £", "Yen ¥", "Ruble ₽"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         view.backgroundColor = .systemBackground
         
         currencyPicker.delegate = self
@@ -52,7 +52,7 @@ class SelectCurrencyViewController: UIViewController {
         currencyPicker.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        
+            
             currencyPicker.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: 10),
             currencyPicker.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -10),
             currencyPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor)

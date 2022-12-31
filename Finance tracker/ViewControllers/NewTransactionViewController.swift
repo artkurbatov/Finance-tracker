@@ -13,9 +13,9 @@ class NewTransactionViewController: UIViewController {
     private let titleLabel = UILabel()
     private let textField = UITextField()
     private let addButton = UIButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 }

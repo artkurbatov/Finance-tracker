@@ -8,7 +8,7 @@
 import UIKit
 
 class FinanceViewController: UIViewController {
-   
+    
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
     private let totalAmountLabel = UILabel()
@@ -31,7 +31,7 @@ class FinanceViewController: UIViewController {
     
     private let model = FinanceModel()
     private var filteredTransactions = [Transaction]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,10 +41,10 @@ class FinanceViewController: UIViewController {
         model.delegate = self
         
         feedback.prepare()
-                
+        
         model.loadTransactions()
         model.getUserCurrency()
-    
+        
         setupTitleLabel()
         configureCurrencyButton()
         configureSortButton()
@@ -87,7 +87,7 @@ class FinanceViewController: UIViewController {
         selectCurrencyButton.layer.cornerRadius = 5
         
         selectCurrencyButton.tintColor = .black
-            
+        
         selectCurrencyButton.translatesAutoresizingMaskIntoConstraints = false
         
         selectCurrencyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
@@ -136,7 +136,7 @@ class FinanceViewController: UIViewController {
         
         historyTableView.showsVerticalScrollIndicator = false
         historyTableView.allowsSelection = false
-                
+        
         historyTableView.translatesAutoresizingMaskIntoConstraints = false
         
         historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -144,7 +144,7 @@ class FinanceViewController: UIViewController {
         historyTableView.topAnchor.constraint(equalTo: periodPicker.bottomAnchor, constant: 10).isActive = true
         historyTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
     }
-        
+    
     private func configureClearButton() {
         
         view.addSubview(clearButton)
@@ -206,7 +206,7 @@ class FinanceViewController: UIViewController {
         
         let alert = model.createAlert()
         
-     //   model.createTestTransaction()
+        //   model.createTestTransaction()
         
         present(alert, animated: true)
     }
