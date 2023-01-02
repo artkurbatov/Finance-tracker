@@ -55,7 +55,7 @@ class FinanceViewController: UIViewController {
         configureAddButton()
     }
     
-    // MARK: - Views setup
+    // MARK: - Views configureation
     
     private func configureTitleLabel() {
         
@@ -66,9 +66,11 @@ class FinanceViewController: UIViewController {
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
+        ])
     }
     
     private func configureCurrencyButton() {
@@ -91,9 +93,11 @@ class FinanceViewController: UIViewController {
         
         selectCurrencyButton.translatesAutoresizingMaskIntoConstraints = false
         
-        selectCurrencyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        selectCurrencyButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        selectCurrencyButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        NSLayoutConstraint.activate([
+            selectCurrencyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            selectCurrencyButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            selectCurrencyButton.widthAnchor.constraint(equalToConstant: 25)
+        ])
     }
     
     private func configureSortButton() {
@@ -110,9 +114,11 @@ class FinanceViewController: UIViewController {
         
         sortButton.translatesAutoresizingMaskIntoConstraints = false
         
-        sortButton.trailingAnchor.constraint(equalTo: selectCurrencyButton.leadingAnchor, constant: -20).isActive = true
-        sortButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        sortButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        NSLayoutConstraint.activate([
+            sortButton.trailingAnchor.constraint(equalTo: selectCurrencyButton.leadingAnchor, constant: -20),
+            sortButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            sortButton.widthAnchor.constraint(equalToConstant: 25)
+        ])
     }
     
     private func configurePickerView() {
@@ -122,7 +128,6 @@ class FinanceViewController: UIViewController {
         periodPicker.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            
             periodPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             periodPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             periodPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
@@ -140,10 +145,12 @@ class FinanceViewController: UIViewController {
         
         historyTableView.translatesAutoresizingMaskIntoConstraints = false
         
-        historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        historyTableView.topAnchor.constraint(equalTo: periodPicker.bottomAnchor, constant: 10).isActive = true
-        historyTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
+        NSLayoutConstraint.activate([
+            historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            historyTableView.topAnchor.constraint(equalTo: periodPicker.bottomAnchor, constant: 10),
+            historyTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6)
+        ])
     }
     
     private func configureClearButton() {
@@ -154,10 +161,12 @@ class FinanceViewController: UIViewController {
         
         view.addSubview(clearButton)
         
-        clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
-        clearButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+        NSLayoutConstraint.activate([
+            clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            clearButton.heightAnchor.constraint(equalToConstant: 40),
+            clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100)
+        ])
     }
     
     private func configureAddButton() {
@@ -168,11 +177,15 @@ class FinanceViewController: UIViewController {
         
         view.addSubview(addButton)
         
-        addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
-        addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+        NSLayoutConstraint.activate([
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            addButton.heightAnchor.constraint(equalToConstant: 40),
+            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100)
+        ])
     }
+    
+    // MARK: - Button Actions
     
     @objc private func sortTransaction() {
         
