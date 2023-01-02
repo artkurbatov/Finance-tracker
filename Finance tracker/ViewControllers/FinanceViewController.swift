@@ -13,9 +13,10 @@ class FinanceViewController: UIViewController {
     private let messageLabel = UILabel()
     private let totalAmountLabel = UILabel()
     
+    private var clearButton: UIButton!
+    private var addButton: UIButton!
+    
     private let selectCurrencyButton = UIButton()
-    private let clearButton = UIButton()
-    private let addButton = UIButton()
     private let sortButton = UIButton()
     
     private let historyTableView = UITableView()
@@ -45,10 +46,10 @@ class FinanceViewController: UIViewController {
         model.loadTransactions()
         model.getUserCurrency()
         
-        setupTitleLabel()
+        configureTitleLabel()
         configureCurrencyButton()
         configureSortButton()
-        setupPickerView()
+        configurePickerView()
         configureTableView()
         configureClearButton()
         configureAddButton()
@@ -56,7 +57,7 @@ class FinanceViewController: UIViewController {
     
     // MARK: - Views setup
     
-    private func setupTitleLabel() {
+    private func configureTitleLabel() {
         
         view.addSubview(titleLabel)
         
@@ -114,7 +115,7 @@ class FinanceViewController: UIViewController {
         sortButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
     }
     
-    private func setupPickerView() {
+    private func configurePickerView() {
         
         view.addSubview(periodPicker)
         
@@ -147,17 +148,11 @@ class FinanceViewController: UIViewController {
     
     private func configureClearButton() {
         
-        view.addSubview(clearButton)
-        
-        clearButton.configuration = .filled()
-        clearButton.configuration?.cornerStyle = .capsule
-        clearButton.configuration?.baseBackgroundColor = .systemRed
-        clearButton.configuration?.baseForegroundColor = .white
-        clearButton.configuration?.title = "Clear"
+        clearButton = model.createButton(bgColor: .systemRed, fgColor: .white, title: "Clear")
         
         clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
         
-        clearButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(clearButton)
         
         clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
@@ -167,17 +162,11 @@ class FinanceViewController: UIViewController {
     
     private func configureAddButton() {
         
-        view.addSubview(addButton)
-        
-        addButton.configuration = .filled()
-        addButton.configuration?.cornerStyle = .capsule
-        addButton.configuration?.baseBackgroundColor = .systemBlue
-        addButton.configuration?.baseForegroundColor = .white
-        addButton.configuration?.title = "Add"
+        addButton = model.createButton(bgColor: .systemBlue, fgColor: .white, title: "Add")
         
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
         
-        addButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addButton)
         
         addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
@@ -205,8 +194,6 @@ class FinanceViewController: UIViewController {
     @objc private func addButtonAction() {
         
         let alert = model.createAlert()
-        
-        //   model.createTestTransaction()
         
         present(alert, animated: true)
     }

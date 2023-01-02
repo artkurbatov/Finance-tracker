@@ -28,21 +28,11 @@ class FinanceModel {
         (currencyTitle: "Euro", currencyImageName: "eurosign", currencySign: "€"),
         (currencyTitle: "Sterling", currencyImageName: "sterlingsign", currencySign: "£"),
         (currencyTitle: "Yen", currencyImageName: "yensign", currencySign: "¥"),
-        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽"),
         (currencyTitle: "Rupee", currencyImageName: "indianrupeesign", currencySign: "₹"),
+        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽")
     ]
     
-    
-    
-    
-    func createTestTransaction() {
-        
-        self.saveTransactions(amount: 20.0, day: "11", month: "12", year: "22")
-        self.saveTransactions(amount: -20.0, day: "7", month: "10", year: "22")
-        self.saveTransactions(amount: 11.0, day: "3", month: "6", year: "20")
-    }
-    
-    
+
     func createAlert() -> UIAlertController {
         
         let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
@@ -66,6 +56,21 @@ class FinanceModel {
         alert.addAction(cancelAction)
         
         return alert
+    }
+    
+    func createButton(bgColor: UIColor, fgColor: UIColor, title: String) -> UIButton {
+        
+        let button = UIButton()
+        
+        button.configuration = .filled()
+        button.configuration?.cornerStyle = .capsule
+        button.configuration?.baseBackgroundColor = bgColor
+        button.configuration?.baseForegroundColor = fgColor
+        button.configuration?.title = title
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
     }
     
     func getDateString() -> (String, String, String) {
