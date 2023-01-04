@@ -77,14 +77,11 @@ class FinanceViewController: UIViewController {
         
         view.addSubview(selectCurrencyButton)
         
-        //TODO: Consider replacing this function
         model.setCurrencyImage(button: selectCurrencyButton)
         
         selectCurrencyButton.showsMenuAsPrimaryAction = true
         selectCurrencyButton.menu = model.selectCurrencyMenu(button: selectCurrencyButton)
-        
-        //selectCurrencyButton.addTarget(self, action: #selector(selectCurrencyAction), for: .touchUpInside)
-        
+    
         // Settings for dark mode
         selectCurrencyButton.backgroundColor = .white
         selectCurrencyButton.layer.cornerRadius = 5
@@ -191,22 +188,10 @@ class FinanceViewController: UIViewController {
         
         model.sortTransactions()
     }
-    
-    @objc private func selectCurrencyAction() {
         
-        let selectCurrencyVC = SelectCurrencyViewController()
-        
-        if let sheet = selectCurrencyVC.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersGrabberVisible = true
-        }
-        
-        present(selectCurrencyVC, animated: true)
-    }
-    
     @objc private func addButtonAction() {
         
-        let alert = model.createAlert()
+        let alert = model.createTransactionAlert()
         
         present(alert, animated: true)
     }
@@ -217,8 +202,10 @@ class FinanceViewController: UIViewController {
     }
     
     @objc private func clearButtonAction() {
+        
         if !model.transactions.isEmpty {
-            model.clearTransactions()
+            let alert = model.createClearAlert()
+            present(alert, animated: true)
         }
     }
 }

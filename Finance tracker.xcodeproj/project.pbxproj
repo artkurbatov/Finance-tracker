@@ -14,7 +14,6 @@
 		B831AE9A295DA32B00E9DBAB /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831AE99295DA32B00E9DBAB /* SelectCurrencyViewController.swift */; };
 		B839FE5029573C130063F040 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B839FE4F29573C130063F040 /* Transaction.swift */; };
 		B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8458550294A0B7D003DA84C /* FinanceModel.swift */; };
-		B864A4A2294D0ACE00C5F9B7 /* NewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B864A4A1294D0ACE00C5F9B7 /* NewTransactionViewController.swift */; };
 		B8698BF52954F4390051750E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8698BF42954F4390051750E /* AppSettings.swift */; };
 		B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */; };
 		B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A4C19D294A58BE0026A118 /* TransactionCell.swift */; };
@@ -30,7 +29,6 @@
 		B831AE99295DA32B00E9DBAB /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		B839FE4F29573C130063F040 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		B8458550294A0B7D003DA84C /* FinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceModel.swift; sourceTree = "<group>"; };
-		B864A4A1294D0ACE00C5F9B7 /* NewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionViewController.swift; sourceTree = "<group>"; };
 		B8698BF42954F4390051750E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFooter.swift; sourceTree = "<group>"; };
 		B8A4C19D294A58BE0026A118 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				B8289CA1294901F100C061DF /* FinanceViewController.swift */,
-				B864A4A1294D0ACE00C5F9B7 /* NewTransactionViewController.swift */,
 				B831AE99295DA32B00E9DBAB /* SelectCurrencyViewController.swift */,
 			);
 			path = ViewControllers;
@@ -187,7 +184,6 @@
 				B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */,
 				B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */,
 				B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */,
-				B864A4A2294D0ACE00C5F9B7 /* NewTransactionViewController.swift in Sources */,
 				B831AE9A295DA32B00E9DBAB /* SelectCurrencyViewController.swift in Sources */,
 				B8698BF52954F4390051750E /* AppSettings.swift in Sources */,
 				B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */,

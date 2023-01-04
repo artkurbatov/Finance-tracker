@@ -35,7 +35,7 @@ class FinanceModel {
     ]
     
 
-    func createAlert() -> UIAlertController {
+    func createTransactionAlert() -> UIAlertController {
         
         let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
         
@@ -55,6 +55,21 @@ class FinanceModel {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        return alert
+    }
+    
+    func createClearAlert() -> UIAlertController {
+     
+        let alert = UIAlertController(title: "Clear history", message: "Are you sure you want to clear your history?", preferredStyle: .alert)
+        
+        let clearAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
+            self.clearTransactions()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(clearAction)
         alert.addAction(cancelAction)
         
         return alert
