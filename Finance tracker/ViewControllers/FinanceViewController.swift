@@ -21,6 +21,9 @@ class FinanceViewController: UIViewController {
     
     private let historyTableView = UITableView()
     
+    private let buttonWidth = UIDevice.current.userInterfaceIdiom == .phone ? 0.3 : 0.2
+    private let buttonsSpacing: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 20 : 40
+    
     private let periodPicker: UISegmentedControl = {
         let view = UISegmentedControl(items: ["Day", "Month", "Year", "All time"])
         view.selectedSegmentIndex = 3
@@ -160,9 +163,9 @@ class FinanceViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            clearButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: buttonWidth),
             clearButton.heightAnchor.constraint(equalToConstant: 40),
-            clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100)
+            clearButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: buttonsSpacing * -1)
         ])
     }
     
@@ -176,9 +179,9 @@ class FinanceViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            addButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: buttonWidth),
             addButton.heightAnchor.constraint(equalToConstant: 40),
-            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100)
+            addButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: buttonsSpacing)
         ])
     }
     
