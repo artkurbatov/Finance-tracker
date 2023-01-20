@@ -17,6 +17,7 @@
 		B8698BF52954F4390051750E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8698BF42954F4390051750E /* AppSettings.swift */; };
 		B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */; };
 		B8A4C19E294A58BE0026A118 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A4C19D294A58BE0026A118 /* TransactionCell.swift */; };
+		B8B4B378297AFCE400741B5A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B4B377297AFCE400741B5A /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B8698BF42954F4390051750E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		B8807EA4294BC5FB00FD94BC /* CustomFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFooter.swift; sourceTree = "<group>"; };
 		B8A4C19D294A58BE0026A118 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		B8B4B377297AFCE400741B5A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				B8807EA8294BC62000FD94BC /* ViewModels */,
 				B8807EA6294BC60D00FD94BC /* Models */,
 				B8698BF42954F4390051750E /* AppSettings.swift */,
+				B8B4B377297AFCE400741B5A /* Launch Screen.storyboard */,
 				B8289CA9294901F100C061DF /* Assets.xcassets */,
 				B8289CAE294901F100C061DF /* Info.plist */,
 			);
@@ -169,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8B4B378297AFCE400741B5A /* Launch Screen.storyboard in Resources */,
 				B8289CAA294901F100C061DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
