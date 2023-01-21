@@ -11,7 +11,6 @@
 		B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289C9F294901F100C061DF /* SceneDelegate.swift */; };
 		B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8289CA1294901F100C061DF /* FinanceViewController.swift */; };
 		B8289CAA294901F100C061DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8289CA9294901F100C061DF /* Assets.xcassets */; };
-		B831AE9A295DA32B00E9DBAB /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831AE99295DA32B00E9DBAB /* SelectCurrencyViewController.swift */; };
 		B839FE5029573C130063F040 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B839FE4F29573C130063F040 /* Transaction.swift */; };
 		B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8458550294A0B7D003DA84C /* FinanceModel.swift */; };
 		B8698BF52954F4390051750E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8698BF42954F4390051750E /* AppSettings.swift */; };
@@ -27,7 +26,6 @@
 		B8289CA1294901F100C061DF /* FinanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceViewController.swift; sourceTree = "<group>"; };
 		B8289CA9294901F100C061DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8289CAE294901F100C061DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B831AE99295DA32B00E9DBAB /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		B839FE4F29573C130063F040 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		B8458550294A0B7D003DA84C /* FinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceModel.swift; sourceTree = "<group>"; };
 		B8698BF42954F4390051750E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				B8289CA1294901F100C061DF /* FinanceViewController.swift */,
-				B831AE99295DA32B00E9DBAB /* SelectCurrencyViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -188,7 +185,6 @@
 				B8807EA5294BC5FB00FD94BC /* CustomFooter.swift in Sources */,
 				B8289CA2294901F100C061DF /* FinanceViewController.swift in Sources */,
 				B8289C9E294901F100C061DF /* AppDelegate.swift in Sources */,
-				B831AE9A295DA32B00E9DBAB /* SelectCurrencyViewController.swift in Sources */,
 				B8698BF52954F4390051750E /* AppSettings.swift in Sources */,
 				B8289CA0294901F100C061DF /* SceneDelegate.swift in Sources */,
 				B8458551294A0B7D003DA84C /* FinanceModel.swift in Sources */,
