@@ -37,13 +37,13 @@ class FinanceModel {
 
     func createTransactionAlert() -> UIAlertController {
         
-        let alert = UIAlertController(title: "New transaction", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "New transaction", message: "Enter the amount. It can start with a minus", preferredStyle: .alert)
         
         alert.addTextField { textField in
             textField.keyboardType = .numbersAndPunctuation
         }
         
-        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+        let addAction = UIAlertAction(title: "Save", style: .default) { _ in
             if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
                 let amount = alert.textFields![0].text!
                 if let number = Double(amount) {
