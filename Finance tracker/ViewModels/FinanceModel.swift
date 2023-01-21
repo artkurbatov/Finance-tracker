@@ -37,7 +37,7 @@ class FinanceModel {
 
     func createTransactionAlert() -> UIAlertController {
         
-        let alert = UIAlertController(title: "New transaction", message: "Enter the amount. It can start with a minus", preferredStyle: .alert)
+        let alert = UIAlertController(title: "New transaction", message: "Enter the amount.\nIt can start with a minus", preferredStyle: .alert)
         
         alert.addTextField { textField in
             textField.keyboardType = .numbersAndPunctuation
