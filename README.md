@@ -1,6 +1,7 @@
-# Finance-tracker
+# FinKeeper
 
-Application helps you keep track of your expenses and income
+FinKeeper is a finance tracker that helps you keep track of your expenses and income
+With this application, you can see how much money you have spent (or saved) over a selected time period
 
 Tech stack: UIKit
 
