@@ -1,6 +1,6 @@
 # Finance-tracker
 
-Application helps ypu keep track of your expenses and income
+Application helps you keep track of your expenses and income
 
 Tech stack: UIKit
 
