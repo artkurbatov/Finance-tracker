@@ -31,7 +31,8 @@ class FinanceModel {
         (currencyTitle: "Rupee", currencyImageName: "indianrupeesign", currencySign: "₹"),
         (currencyTitle: "Lari", currencyImageName: "larisign", currencySign: "₾"),
         (currencyTitle: "Turkish lira", currencyImageName: "turkishlirasign", currencySign: "₺"),
-        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽")
+        (currencyTitle: "Ruble", currencyImageName: "rublesign", currencySign: "₽"),
+        (currencyTitle: "Manat", currencyImageName: "manatsign", currencySign: "₼")
     ]
     
 
