@@ -33,7 +33,7 @@ class FinanceViewController: UIViewController {
     
     private let feedback = UISelectionFeedbackGenerator()
     
-    private let model = FinanceModel()
+    private let model = FinancePresenter()
     private var filteredTransactions = [Transaction]()
     
     override func viewDidLoad() {
@@ -61,7 +61,6 @@ class FinanceViewController: UIViewController {
     // MARK: - Views configureation
     
     private func configureTitleLabel() {
-        
         view.addSubview(titleLabel)
         
         titleLabel.text = "Finance"
@@ -77,7 +76,6 @@ class FinanceViewController: UIViewController {
     }
     
     private func configureCurrencyButton() {
-        
         view.addSubview(selectCurrencyButton)
         
         model.setCurrencyImage(button: selectCurrencyButton)
@@ -101,7 +99,6 @@ class FinanceViewController: UIViewController {
     }
     
     private func configureSortButton() {
-        
         view.addSubview(sortButton)
         
         sortButton.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
@@ -122,7 +119,6 @@ class FinanceViewController: UIViewController {
     }
     
     private func configurePickerView() {
-        
         view.addSubview(periodPicker)
         
         periodPicker.translatesAutoresizingMaskIntoConstraints = false
@@ -135,9 +131,8 @@ class FinanceViewController: UIViewController {
     }
     
     private func configureTableView() {
-        
         view.addSubview(historyTableView)
-        historyTableView.register(TransactionCell.self, forCellReuseIdentifier: FinanceModel.identifier)
+        historyTableView.register(TransactionCell.self, forCellReuseIdentifier: FinancePresenter.identifier)
         historyTableView.register(CustomFooter.self, forHeaderFooterViewReuseIdentifier: "footer")
         
         historyTableView.showsVerticalScrollIndicator = false
@@ -154,7 +149,6 @@ class FinanceViewController: UIViewController {
     }
     
     private func configureClearButton() {
-        
         clearButton = model.createButton(bgColor: .systemRed, fgColor: .white, title: "Clear")
         
         clearButton.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
@@ -170,11 +164,8 @@ class FinanceViewController: UIViewController {
     }
     
     private func configureAddButton() {
-        
         addButton = model.createButton(bgColor: .systemBlue, fgColor: .white, title: "Add")
-        
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
-        
         view.addSubview(addButton)
         
         NSLayoutConstraint.activate([
@@ -186,26 +177,27 @@ class FinanceViewController: UIViewController {
     }
     
     // MARK: - Button Actions
-    
     @objc private func sortTransaction() {
-        
         model.sortTransactions()
     }
         
     @objc private func addButtonAction() {
-        
-        let alert = model.createTransactionAlert()
-        
-        present(alert, animated: true)
+        let newTransaction = NewTransactionViewController()
+        let navigationVC = UINavigationController(rootViewController: newTransaction)
+        navigationVC.modalPresentationStyle = .pageSheet
+        if let sheet = navigationVC.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        //let alert = model.createTransactionAlert()
+        present(navigationVC, animated: true)
     }
     
     @objc private func reloadTransactions() {
-        
         model.loadTransactions()
     }
     
     @objc private func clearButtonAction() {
-        
         if !model.transactions.isEmpty {
             let alert = model.createClearAlert()
             present(alert, animated: true)
@@ -213,8 +205,7 @@ class FinanceViewController: UIViewController {
     }
 }
 
-extension FinanceViewController: FinaceModelDelegate {
-    
+extension FinanceViewController: FinacePresenterDelegate {
     func filterTransactions() {
         switch periodPicker.selectedSegmentIndex {
         case 0 :
@@ -239,13 +230,12 @@ extension FinanceViewController: FinaceModelDelegate {
 
 
 extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredTransactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = historyTableView.dequeueReusableCell(withIdentifier: FinanceModel.identifier, for: indexPath) as? TransactionCell {
+        if let cell = historyTableView.dequeueReusableCell(withIdentifier: FinancePresenter.identifier, for: indexPath) as? TransactionCell {
             cell.configureCell(transactionToDisplay: filteredTransactions[indexPath.row])
             return cell
         }
@@ -253,12 +243,10 @@ extension FinanceViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let action = UIContextualAction(style: .destructive, title: "delete") { _, _, _ in
             let transaction = self.filteredTransactions[indexPath.row]
             self.model.deleteTransaction(transactionID: transaction.id)
         }
-        
         return UISwipeActionsConfiguration(actions: [action])
     }
     

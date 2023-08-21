@@ -9,18 +9,14 @@ import UIKit
 import Foundation
 
 
-protocol FinaceModelDelegate {
-    
+protocol FinacePresenterDelegate: AnyObject {
     func filterTransactions()
 }
 
-
-class FinanceModel {
+class FinancePresenter {
     
-    var delegate: FinaceModelDelegate?
-    
+    weak var delegate: FinacePresenterDelegate?
     static let identifier = "transactionCell"
-    
     var transactions = [Transaction]()
     
     private let currencyList = [
@@ -35,9 +31,7 @@ class FinanceModel {
         (currencyTitle: "Manat", currencyImageName: "manatsign", currencySign: "₼")
     ]
     
-
     func createTransactionAlert() -> UIAlertController {
-        
         let alert = UIAlertController(title: "New record", message: "Enter the amount.\nIt can start with a minus", preferredStyle: .alert)
         
         alert.addTextField { textField in
@@ -62,9 +56,7 @@ class FinanceModel {
     }
     
     func createClearAlert() -> UIAlertController {
-     
         let alert = UIAlertController(title: "Clear history", message: "Are you sure you want to clear your history?", preferredStyle: .alert)
-        
         let clearAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
             self.clearTransactions()
         }
@@ -77,7 +69,6 @@ class FinanceModel {
     }
     
     func createButton(bgColor: UIColor, fgColor: UIColor, title: String) -> UIButton {
-        
         let button = UIButton()
         
         button.configuration = .filled()
@@ -140,6 +131,8 @@ class FinanceModel {
             imageName = "larisign"
         case "₺":
             imageName = "turkishlirasign"
+        case "₼":
+            imageName = "manatsign"
         default:
             imageName = "dollarsign"
         }
@@ -177,7 +170,6 @@ class FinanceModel {
     }
     
     func loadTransactions() {
-        
         if let data = UserDefaults.standard.data(forKey: AppSettings.transactionsKey) {
             
             if let decoded = try? JSONDecoder().decode([Transaction].self, from: data) {
@@ -189,14 +181,12 @@ class FinanceModel {
     }
     
     func saveCurrency() {
-        
         if let encoded = try? JSONEncoder().encode(AppSettings.currency) {
             UserDefaults.standard.set(encoded, forKey: AppSettings.currancyKey)
         }
     }
     
     func getUserCurrency() {
-        
         if let data = UserDefaults.standard.data(forKey: AppSettings.currancyKey) {
             
             if let decoded = try? JSONDecoder().decode(String.self, from: data) {
@@ -209,14 +199,12 @@ class FinanceModel {
     //MARK: - Transactions section
     
     func saveTransactions(amount: Double, day: String, month: String, year: String) {
-        
         transactions.append(Transaction(amount: amount, day: day, month: month, year: year))
         saveData()
         delegate?.filterTransactions()
     }
     
     func deleteTransaction(transactionID: UUID) {
-        
         if let index = transactions.firstIndex(where: { transaction in
             transaction.id == transactionID
         }) {
@@ -227,14 +215,12 @@ class FinanceModel {
     }
     
     func clearTransactions() {
-        
         transactions.removeAll()
         saveData()
         delegate?.filterTransactions()
     }
     
     func sortTransactions() {
-        
         transactions.reverse()
         delegate?.filterTransactions()
     }
