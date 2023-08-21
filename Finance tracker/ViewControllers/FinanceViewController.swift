@@ -182,15 +182,8 @@ class FinanceViewController: UIViewController {
     }
         
     @objc private func addButtonAction() {
-        let newTransaction = NewTransactionViewController()
-        let navigationVC = UINavigationController(rootViewController: newTransaction)
-        navigationVC.modalPresentationStyle = .pageSheet
-        if let sheet = navigationVC.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersGrabberVisible = true
-        }
-        //let alert = model.createTransactionAlert()
-        present(navigationVC, animated: true)
+        let alert = model.createTransactionAlert()
+        present(alert, animated: true)
     }
     
     @objc private func reloadTransactions() {

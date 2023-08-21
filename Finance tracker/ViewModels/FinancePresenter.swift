@@ -32,18 +32,22 @@ class FinancePresenter {
     ]
     
     func createTransactionAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "New record", message: "Enter the amount.\nIt can start with a minus", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Enter the amount.\nIt can start with a minus", message: nil, preferredStyle: .alert)
         
         alert.addTextField { textField in
             textField.keyboardType = .numbersAndPunctuation
+            textField.placeholder = "amount"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "comment (optional)"
         }
         
         let addAction = UIAlertAction(title: "Save", style: .default) { _ in
-            if alert.textFields?[0] != nil && alert.textFields?[0].text != nil {
-                let amount = alert.textFields![0].text!
+            if let amountText = alert.textFields?[0].text, let comment = alert.textFields?[1].text {
+                let amount = amountText
                 if let number = Double(amount) {
                     let dateString = self.getDateString()
-                    self.saveTransactions(amount: number.round(to: 2), day: dateString.0, month: dateString.1, year: dateString.2)
+                    self.saveTransactions(amount: number.round(to: 2), comment: comment, day: dateString.0, month: dateString.1, year: dateString.2)
                 }
             }
         }
@@ -83,7 +87,6 @@ class FinancePresenter {
     }
     
     func getDateString() -> (String, String, String) {
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yy"
         
@@ -100,7 +103,6 @@ class FinancePresenter {
     
     
     func calculateTotal(transactions: [Transaction]) -> Double {
-        
         var total = 0.0
         
         for transaction in transactions {
@@ -111,9 +113,7 @@ class FinancePresenter {
     }
     
     // MARK: - Currency section
-    
     func setCurrencyImage(button: UIButton) {
-        
         var imageName = ""
         
         switch AppSettings.currency {
@@ -141,7 +141,6 @@ class FinancePresenter {
     }
     
     func selectCurrencyMenu(button: UIButton) ->UIMenu {
-        
         var actions = [UIAction]()
         
         for currency in currencyList {
@@ -198,7 +197,7 @@ class FinancePresenter {
     
     //MARK: - Transactions section
     
-    func saveTransactions(amount: Double, day: String, month: String, year: String) {
+    func saveTransactions(amount: Double, comment: String, day: String, month: String, year: String) {
         transactions.append(Transaction(amount: amount, day: day, month: month, year: year))
         saveData()
         delegate?.filterTransactions()
