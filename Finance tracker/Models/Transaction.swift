@@ -11,6 +11,7 @@ struct Transaction: Codable {
     
     var id = UUID()
     var amount: Double
+    var comment: String
     var day: String
     var month: String
     var year: String

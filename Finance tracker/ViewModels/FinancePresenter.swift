@@ -142,7 +142,6 @@ class FinancePresenter {
     
     func selectCurrencyMenu(button: UIButton) ->UIMenu {
         var actions = [UIAction]()
-        
         for currency in currencyList {
             let action = UIAction(title: currency.currencyTitle, image: UIImage(systemName: currency.currencyImageName)) { _ in
                 AppSettings.currency = currency.currencySign
@@ -150,7 +149,6 @@ class FinancePresenter {
                 button.setImage(UIImage(systemName: currency.currencyImageName), for: .normal)
                 self.saveCurrency()
             }
-            
             actions.append(action)
         }
         
@@ -170,9 +168,7 @@ class FinancePresenter {
     
     func loadTransactions() {
         if let data = UserDefaults.standard.data(forKey: AppSettings.transactionsKey) {
-            
             if let decoded = try? JSONDecoder().decode([Transaction].self, from: data) {
-                
                 transactions = decoded
             }
         }
@@ -187,9 +183,7 @@ class FinancePresenter {
     
     func getUserCurrency() {
         if let data = UserDefaults.standard.data(forKey: AppSettings.currancyKey) {
-            
             if let decoded = try? JSONDecoder().decode(String.self, from: data) {
-                
                 AppSettings.currency = decoded
             }
         }
@@ -198,7 +192,7 @@ class FinancePresenter {
     //MARK: - Transactions section
     
     func saveTransactions(amount: Double, comment: String, day: String, month: String, year: String) {
-        transactions.append(Transaction(amount: amount, day: day, month: month, year: year))
+        transactions.append(Transaction(amount: amount, comment: comment, day: day, month: month, year: year))
         saveData()
         delegate?.filterTransactions()
     }
