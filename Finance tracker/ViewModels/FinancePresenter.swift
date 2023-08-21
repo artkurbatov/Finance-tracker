@@ -31,6 +31,10 @@ class FinancePresenter {
         (currencyTitle: "Manat", currencyImageName: "manatsign", currencySign: "₼")
     ]
     
+    init() {
+        convertTransactions()
+    }
+    
     func createTransactionAlert() -> UIAlertController {
         let alert = UIAlertController(title: "Enter the amount.\nIt can start with a minus", message: nil, preferredStyle: .alert)
         
@@ -157,9 +161,25 @@ class FinancePresenter {
         return menu
     }
     
+    // MARK: - Functions to backup user's data before updating to a new version of transactions
+    private func convertTransactions() {
+        if !AppSettings.isUpdated {
+            guard let data = UserDefaults.standard.data(forKey: AppSettings.transactionsKey) else {return}
+            guard let decoded = try? JSONDecoder().decode([OldTransaction].self, from: data) else {return}
+            for oldTransaction in decoded {
+                let transaction = Transaction(amount: oldTransaction.amount,
+                                              comment: "",
+                                              day: oldTransaction.day,
+                                              month: oldTransaction.month,
+                                              year: oldTransaction.year)
+                self.transactions.append(transaction)
+            }
+            self.saveData()
+            AppSettings.isUpdated = true
+        }
+    }
     
     // MARK: - User defaults functions
-    
     private func saveData() {
         if let encoded = try? JSONEncoder().encode(transactions) {
             UserDefaults.standard.set(encoded, forKey: AppSettings.transactionsKey)

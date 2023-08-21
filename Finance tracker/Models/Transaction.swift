@@ -16,3 +16,12 @@ struct Transaction: Codable {
     var month: String
     var year: String
 }
+
+struct OldTransaction: Codable {
+    
+    var id = UUID()
+    var amount: Double
+    var day: String
+    var month: String
+    var year: String
+}
