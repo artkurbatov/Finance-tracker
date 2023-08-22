@@ -47,9 +47,9 @@ class FinancePresenter {
         }
         
         let addAction = UIAlertAction(title: "Save", style: .default) { _ in
-            if let amountText = alert.textFields?[0].text, let comment = alert.textFields?[1].text {
-                let amount = amountText
-                if let number = Double(amount) {
+            if let amountText = alert.textFields?[0].text?.replacingOccurrences(of: ",", with: ".").trimmingCharacters(in: .whitespacesAndNewlines),
+               let comment = alert.textFields?[1].text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                if let number = Double(amountText) {
                     let dateString = self.getDateString()
                     self.saveTransactions(amount: number.round(to: 2), comment: comment, day: dateString.0, month: dateString.1, year: dateString.2)
                 }
@@ -108,11 +108,9 @@ class FinancePresenter {
     
     func calculateTotal(transactions: [Transaction]) -> Double {
         var total = 0.0
-        
         for transaction in transactions {
             total += transaction.amount
         }
-        
         return total.round(to: 2)
     }
     

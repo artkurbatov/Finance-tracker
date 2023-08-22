@@ -68,7 +68,7 @@
 				B8289C9F294901F100C061DF /* SceneDelegate.swift */,
 				B831AE98295DA28100E9DBAB /* ViewControllers */,
 				B8807EA7294BC61A00FD94BC /* Views */,
-				B8807EA8294BC62000FD94BC /* ViewModels */,
+				B8807EA8294BC62000FD94BC /* Presenter */,
 				B8807EA6294BC60D00FD94BC /* Models */,
 				B8698BF42954F4390051750E /* AppSettings.swift */,
 				B8B4B377297AFCE400741B5A /* Launch Screen.storyboard */,
@@ -103,12 +103,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B8807EA8294BC62000FD94BC /* ViewModels */ = {
+		B8807EA8294BC62000FD94BC /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				B8458550294A0B7D003DA84C /* FinancePresenter.swift */,
 			);
-			path = ViewModels;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,7 +328,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.artkurbatov.Finance-tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -356,7 +356,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.artkurbatov.Finance-tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
