@@ -32,6 +32,7 @@ class FinancePresenter {
     ]
     
     init() {
+        getUpdateStatus()
         convertTransactions()
     }
     
@@ -149,7 +150,8 @@ class FinancePresenter {
                 AppSettings.currency = currency.currencySign
                 self.delegate?.filterTransactions()
                 button.setImage(UIImage(systemName: currency.currencyImageName), for: .normal)
-                self.saveCurrency()
+                self.saveData(AppSettings.currency, key: AppSettings.currancyKey)
+                
             }
             actions.append(action)
         }
@@ -172,15 +174,16 @@ class FinancePresenter {
                                               year: oldTransaction.year)
                 self.transactions.append(transaction)
             }
-            self.saveData()
+            self.saveData(transactions, key: AppSettings.transactionsKey)
             AppSettings.isUpdated = true
+            self.saveData(AppSettings.isUpdated, key: AppSettings.updateKey)
         }
     }
     
     // MARK: - User defaults functions
-    private func saveData() {
-        if let encoded = try? JSONEncoder().encode(transactions) {
-            UserDefaults.standard.set(encoded, forKey: AppSettings.transactionsKey)
+    func saveData<T: Encodable>(_ data: T, key: String) {
+        if let encoded = try? JSONEncoder().encode(data) {
+            UserDefaults.standard.set(encoded, forKey: key)
         }
     }
     
@@ -193,9 +196,11 @@ class FinancePresenter {
         delegate?.filterTransactions()
     }
     
-    func saveCurrency() {
-        if let encoded = try? JSONEncoder().encode(AppSettings.currency) {
-            UserDefaults.standard.set(encoded, forKey: AppSettings.currancyKey)
+    func getUpdateStatus() {
+        if let data = UserDefaults.standard.data(forKey: AppSettings.updateKey) {
+            if let decoded = try? JSONDecoder().decode(Bool.self, from: data) {
+                AppSettings.isUpdated = decoded
+            }
         }
     }
     
@@ -208,10 +213,9 @@ class FinancePresenter {
     }
     
     //MARK: - Transactions section
-    
     func saveTransactions(amount: Double, comment: String, day: String, month: String, year: String) {
         transactions.append(Transaction(amount: amount, comment: comment, day: day, month: month, year: year))
-        saveData()
+        self.saveData(transactions, key: AppSettings.transactionsKey)
         delegate?.filterTransactions()
     }
     
@@ -220,14 +224,14 @@ class FinancePresenter {
             transaction.id == transactionID
         }) {
             self.transactions.remove(at: index)
-            saveData()
+            self.saveData(transactions, key: AppSettings.transactionsKey)
             delegate?.filterTransactions()
         }
     }
     
     func clearTransactions() {
         transactions.removeAll()
-        saveData()
+        self.saveData(transactions, key: AppSettings.transactionsKey)
         delegate?.filterTransactions()
     }
     

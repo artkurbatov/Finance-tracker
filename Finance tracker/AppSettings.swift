@@ -13,5 +13,6 @@ class AppSettings {
     
     static let transactionsKey = "Transactions"
     static let currancyKey = "Currency"
+    static let updateKey = "updateStatus"
     static var isUpdated = false
 }
