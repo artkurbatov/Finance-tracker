@@ -9,7 +9,5 @@ Tech stack: UIKit
 
 ## Preview
 
-https://user-images.githubusercontent.com/105456398/210180390-24596a1f-6c5f-41bf-842a-c7ab9d1d3323.mp4
-
-
+https://github.com/KurbatovIOS/Finance-tracker/assets/105456398/9debca79-6d6f-42ca-969b-9d25fc2c9566
 
